@@ -10,8 +10,12 @@ import org.springframework.stereotype.Component;
 public class LoginCommand implements Command {
     private static final int LOGIN_ELEMENT = 0;
 
-    @Autowired
     private ActorRef loginActor;
+
+    @Autowired
+    public LoginCommand(ActorRef loginActor) {
+        this.loginActor = loginActor;
+    }
 
     @Override
     public void execute(ActorRef sender, String command) {

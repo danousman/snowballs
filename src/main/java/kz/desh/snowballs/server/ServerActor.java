@@ -6,9 +6,7 @@ import kz.desh.snowballs.server.commands.executor.CommandExecutor;
 import lombok.val;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
-@Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ServerActor extends UntypedActor {
     private CommandExecutor commandExecutor;
