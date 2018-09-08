@@ -1,20 +1,24 @@
 package kz.desh.snowballs.server;
 
-import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
 import akka.actor.Props;
+import akka.actor.UntypedActor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 
-public class LoginActor extends AbstractActor {
+public class LoginActor extends UntypedActor {
     public static Props props() {
-        return Props.create(LoginActor.class, LoginActor::new);
+        return Props.create(LoginActor.class);
     }
 
     @Override
-    public Receive createReceive() {
-        return receiveBuilder()
-                .match(LoginActorCommand.class, command -> System.out.println("Login actor received command with login: " + command.getLogin()))
-                .build();
+    public void onReceive(Object message) {
+        if (message instanceof LoginActorCommand) {
+            val command = (LoginActorCommand) message;
+            getSender().tell("Hello, Demon! " + System.currentTimeMillis(), ActorRef.noSender());
+            System.out.println(System.currentTimeMillis() + " Login actor sent command with login: " + command.getLogin());
+        }
     }
 
     @RequiredArgsConstructor

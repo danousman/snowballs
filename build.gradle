@@ -13,8 +13,8 @@ repositories {
 
 dependencies {
     //akka
-    compile group: 'com.typesafe.akka', name: 'akka-actor_2.12', version: '2.5.15'
-    compile group: 'com.typesafe.akka', name: 'akka-remote_2.12', version: '2.5.16'
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.3.16'
+    compile group: 'com.typesafe.akka', name: 'akka-remote_2.11', version: '2.3.16'
 
     //lombok
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'

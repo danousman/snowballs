@@ -1,11 +1,12 @@
 package kz.desh.snowballs.server;
 
-import akka.actor.AbstractActor;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
+import akka.actor.UntypedActor;
 import kz.desh.snowballs.server.commands.executor.CommandExecutor;
+import lombok.val;
 
-public class ServerActor extends AbstractActor {
+public class ServerActor extends UntypedActor {
     private CommandExecutor commandExecutor;
 
     private ServerActor(ActorSystem system) {
@@ -17,9 +18,10 @@ public class ServerActor extends AbstractActor {
     }
 
     @Override
-    public Receive createReceive() {
-        return receiveBuilder()
-                .match(String.class, command -> this.commandExecutor.execute(getSender(), command))
-                .build();
+    public void onReceive(Object message) {
+        if (message instanceof String) {
+            val command = (String) message;
+            this.commandExecutor.execute(getSender(), command);
+        }
     }
 }

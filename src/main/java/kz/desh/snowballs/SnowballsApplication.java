@@ -1,6 +1,5 @@
 package kz.desh.snowballs;
 
-import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import kz.desh.snowballs.server.ServerActor;
 import lombok.val;
@@ -17,8 +16,7 @@ public class SnowballsApplication {
     }
 
     private static void createServerActor(ActorSystem system) {
-        val server = system.actorOf(ServerActor.props(system), "server");
-        server.tell("00001 login", ActorRef.noSender());
+        system.actorOf(ServerActor.props(system), "server");
     }
 
     private static void listenConsoleCommands(ActorSystem system) {
@@ -29,13 +27,12 @@ public class SnowballsApplication {
             if (!STOP_SERVER_COMMAND.equals(inputString)) {
                 listenConsoleCommands(system);
             } else {
-                stopServer(system);
+                stopServer();
             }
         }
     }
 
-    private static void stopServer(ActorSystem system) {
-        system.terminate();
+    private static void stopServer() {
         System.exit(0);
     }
 }
