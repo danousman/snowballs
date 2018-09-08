@@ -1,19 +1,20 @@
 package kz.desh.snowballs.server.commands.executor;
 
 import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.LoginCommand;
 import lombok.val;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class CommandExecutor {
     private final Map<String, Command> commands = new HashMap<>();
 
-    public CommandExecutor(ActorSystem system) {
-        this.commands.put("00001", new LoginCommand(system));
+    public CommandExecutor(LoginCommand loginCommand) {
+        this.commands.put("00001", loginCommand);
     }
 
     public void execute(ActorRef sender, String command) {

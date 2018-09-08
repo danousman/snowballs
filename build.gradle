@@ -12,6 +12,9 @@ repositories {
 }
 
 dependencies {
+    //spring boot
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '1.5.15.RELEASE'
+
     //akka
     compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.3.16'
     compile group: 'com.typesafe.akka', name: 'akka-remote_2.11', version: '2.3.16'
