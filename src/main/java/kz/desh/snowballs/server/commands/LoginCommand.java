@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoginCommand implements Command {
+    public static final String COMMAND = "00001";
+
     private static final int LOGIN_ELEMENT = 0;
 
     private ActorRef loginActor;

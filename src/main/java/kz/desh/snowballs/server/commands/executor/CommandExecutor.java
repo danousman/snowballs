@@ -16,7 +16,7 @@ public class CommandExecutor {
 
     @Autowired
     public CommandExecutor(LoginCommand loginCommand) {
-        this.commands.put("00001", loginCommand);
+        this.commands.put(LoginCommand.COMMAND, loginCommand);
     }
 
     public void execute(ActorRef sender, String command) {

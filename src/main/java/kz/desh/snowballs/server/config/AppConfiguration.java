@@ -34,5 +34,4 @@ public class AppConfiguration {
     public ActorRef loginActor(ActorSystem actorSystem) {
         return actorSystem.actorOf(LoginActor.props(), "login");
     }
-
 }
