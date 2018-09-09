@@ -1,4 +1,4 @@
-package kz.desh.snowballs.server;
+package kz.desh.snowballs.server.actors;
 
 import akka.actor.ActorRef;
 import akka.actor.Props;

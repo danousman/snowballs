@@ -1,7 +1,7 @@
 package kz.desh.snowballs.server.commands;
 
 import akka.actor.ActorRef;
-import kz.desh.snowballs.server.LoginActor;
+import kz.desh.snowballs.server.actors.LoginActor;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

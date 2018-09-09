@@ -2,8 +2,8 @@ package kz.desh.snowballs.server.config;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import kz.desh.snowballs.server.LoginActor;
-import kz.desh.snowballs.server.ServerActor;
+import kz.desh.snowballs.server.actors.LoginActor;
+import kz.desh.snowballs.server.actors.ServerActor;
 import kz.desh.snowballs.server.commands.executor.CommandExecutor;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
