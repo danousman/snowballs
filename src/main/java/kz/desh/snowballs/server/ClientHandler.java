@@ -25,7 +25,7 @@ public class ClientHandler extends Thread {
         try {
             val out = new PrintWriter(this.clientSocket.getOutputStream(), true);
             val in = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
-            listenCommands(in);
+            listenCommands(in, out);
             in.close();
             out.close();
             this.clientSocket.close();
@@ -36,10 +36,10 @@ public class ClientHandler extends Thread {
         }
     }
 
-    private void listenCommands(BufferedReader in) throws IOException {
+    private void listenCommands(BufferedReader in, PrintWriter out) throws IOException {
         String command;
         while ((command = in.readLine()) != null) {
-            this.commandExecutor.execute(command);
+            out.write(this.commandExecutor.execute(command));
         }
     }
 }

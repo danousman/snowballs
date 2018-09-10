@@ -12,8 +12,9 @@ public class LoginCommand implements Command {
     private static final int LOGIN_ELEMENT = 0;
 
     @Override
-    public void execute(String command) {
+    public String execute(String command) {
         val login = splitCommand(command)[LOGIN_ELEMENT];
         log.info("Login command from client: {}", login);
+        return "Result from server";
     }
 }

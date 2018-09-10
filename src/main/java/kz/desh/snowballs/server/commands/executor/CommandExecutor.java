@@ -18,9 +18,9 @@ public class CommandExecutor {
         this.commands.put(LoginCommand.COMMAND, loginCommand);
     }
 
-    public void execute(String command) {
+    public String execute(String command) {
         val commandPrefix = command.substring(0, 5);
         val commandPostfix = command.substring(6);
-        this.commands.get(commandPrefix).execute(commandPostfix);
+        return this.commands.get(commandPrefix).execute(commandPostfix);
     }
 }

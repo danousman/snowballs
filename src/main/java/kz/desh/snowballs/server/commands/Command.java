@@ -5,5 +5,5 @@ public interface Command {
         return command.split(" ");
     }
 
-    void execute(String command);
+    String execute(String command);
 }
