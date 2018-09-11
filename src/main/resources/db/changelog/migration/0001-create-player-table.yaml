@@ -1,0 +1,15 @@
+databaseChangeLog:
+- changeSet:
+    id: 0001-create-player-table
+    author: danila_dashko
+    changes:
+    - createTable:
+        tableName: player
+        columns:
+        - column:
+            name: id
+            type: integer
+        - addPrimaryKey:
+            tableName: player
+            columnNames: id
+            constraintName: pk_player
