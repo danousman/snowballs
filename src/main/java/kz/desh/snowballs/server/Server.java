@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -39,7 +40,9 @@ public class Server {
     @PreDestroy
     public void stop() {
         try {
-            this.serverSocket.close();
+            if (Objects.nonNull(this.serverSocket)) {
+                this.serverSocket.close();
+            }
         } catch (IOException e) {
             log.error("Exception occurs during stop server.", e);
         }

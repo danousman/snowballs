@@ -15,6 +15,6 @@ public class LoginCommand implements Command {
     public String execute(String command) {
         val login = splitCommand(command)[LOGIN_ELEMENT];
         log.info("Login command from client: {}", login);
-        return "Result from server";
+        return "Command was send " + login;
     }
 }

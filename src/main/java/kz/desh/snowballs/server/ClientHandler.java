@@ -2,7 +2,6 @@ package kz.desh.snowballs.server;
 
 import kz.desh.snowballs.server.commands.executor.CommandExecutor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,15 +21,12 @@ public class ClientHandler extends Thread {
     }
 
     public void run() {
-        try {
-            val out = new PrintWriter(this.clientSocket.getOutputStream(), true);
-            val in = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
+        try (PrintWriter out = new PrintWriter(this.clientSocket.getOutputStream(), true);
+             BufferedReader in = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()))) {
             listenCommands(in, out);
-            in.close();
-            out.close();
-            this.clientSocket.close();
         } catch (SocketException e) {
             log.warn("Connection finished");
+            finishClientSession();
         } catch (IOException e) {
             log.error("Exception occurred during cooperation with client");
         }
@@ -39,7 +35,10 @@ public class ClientHandler extends Thread {
     private void listenCommands(BufferedReader in, PrintWriter out) throws IOException {
         String command;
         while ((command = in.readLine()) != null) {
-            out.write(this.commandExecutor.execute(command));
+            out.println(this.commandExecutor.execute(command));
         }
+    }
+
+    private void finishClientSession() {
     }
 }
