@@ -11,6 +11,10 @@ import java.util.Map;
 
 @Component
 public class CommandExecutor {
+    private static final int COMMAND_BEGIN_INDEX = 0;
+    private static final int COMMAND_END_INDEX = 5;
+    private static final int COMMAND_BODY_START_INDEX = 6;
+
     private final Map<String, Command> commands = new HashMap<>();
 
     @Autowired
@@ -19,8 +23,8 @@ public class CommandExecutor {
     }
 
     public String execute(String command) {
-        val commandPrefix = command.substring(0, 5);
-        val commandPostfix = command.substring(6);
+        val commandPrefix = command.substring(COMMAND_BEGIN_INDEX, COMMAND_END_INDEX);
+        val commandPostfix = command.substring(COMMAND_BODY_START_INDEX);
         return this.commands.get(commandPrefix).execute(commandPostfix);
     }
 }
