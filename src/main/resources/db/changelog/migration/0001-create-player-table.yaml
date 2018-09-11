@@ -9,7 +9,7 @@ databaseChangeLog:
         - column:
             name: id
             type: integer
-        - addPrimaryKey:
-            tableName: player
-            columnNames: id
-            constraintName: pk_player
+    - addPrimaryKey:
+        tableName: player
+        columnNames: id
+        constraintName: pk_player
