@@ -51,7 +51,7 @@ public class LoginCommand implements Command {
         return String.format(RESPONSE_COMMAND,
                 player.getLevel(),
                 player.getExperience(),
-                Experience.EXPERIENCE_FOR_NEX_LEVEL.get(player.getLevel()));
+                Experience.EXPERIENCE_FOR_NEXT_LEVEL.get(player.getLevel()));
     }
 
     private PlayerEntity createPlayer(String login) {
