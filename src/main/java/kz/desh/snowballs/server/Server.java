@@ -15,12 +15,13 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class Server {
     private final CommandExecutor commandExecutor;
+    private final ServerProps serverProps;
 
     private ServerSocket serverSocket;
 
-    public void start(int port) {
+    public void start() {
         try {
-            this.serverSocket = new ServerSocket(port);
+            this.serverSocket = new ServerSocket(this.serverProps.getPort());
             listenClients();
         } catch (IOException e) {
             log.error("Exception occurs. Server will stop.", e);

@@ -5,5 +5,5 @@ public interface Command {
         return command.split(" ");
     }
 
-    String execute(String command);
+    String execute(Long playerId, String command, CommandCallback callback);
 }

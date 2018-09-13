@@ -14,6 +14,7 @@ import java.net.SocketException;
 public class ClientHandler extends Thread {
     private CommandExecutor commandExecutor;
     private Socket clientSocket;
+    private Long playerId = null;
 
     ClientHandler(Socket socket, CommandExecutor commandExecutor) {
         this.clientSocket = socket;
@@ -35,7 +36,7 @@ public class ClientHandler extends Thread {
     private void listenCommands(BufferedReader in, PrintWriter out) throws IOException {
         String command;
         while ((command = in.readLine()) != null) {
-            out.println(this.commandExecutor.execute(command));
+            out.println(this.commandExecutor.execute(playerId, command, (args) -> this.playerId = Long.valueOf(args[0].toString())));
         }
     }
 

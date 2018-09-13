@@ -7,3 +7,7 @@ spring:
     password: root
     minimumIdle: 5
     maximumPoolSize: 50
+
+snowballs:
+  server:
+    port: 2600

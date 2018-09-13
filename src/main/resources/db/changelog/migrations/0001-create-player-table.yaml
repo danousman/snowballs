@@ -1,0 +1,36 @@
+databaseChangeLog:
+- changeSet:
+    id: 0001-create-player-table
+    author: danila_dashko
+    changes:
+    - createTable:
+        tableName: player
+        columns:
+        - column:
+            name: id
+            type: serial
+            constraints:
+              primaryKey: true
+        - column:
+            name: login
+            type: text
+            constraints:
+              nullable: false
+        - column:
+            name: level
+            type: integer
+            constraints:
+              nullable: false
+        - column:
+            name: experience
+            type: integer
+            constraints:
+              nullable: false
+    - createIndex:
+        columns:
+        - column:
+            name: login
+            type: text
+        indexName: idx_login
+        tableName: player
+        unique: true
