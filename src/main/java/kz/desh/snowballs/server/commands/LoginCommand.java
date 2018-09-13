@@ -46,7 +46,7 @@ public class LoginCommand implements Command {
         this.entityManager.detach(player);
         Players.addPlayer(player);
         if (callback != null) {
-            callback.callback(player.getId());
+            callback.call(player.getId());
         }
         return String.format(RESPONSE_COMMAND,
                 player.getLevel(),
