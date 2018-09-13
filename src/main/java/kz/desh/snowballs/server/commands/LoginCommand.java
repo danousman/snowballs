@@ -35,16 +35,19 @@ public class LoginCommand implements Command {
         val playerEntity = this.playerEntityRepository.findByLogin(command);
         if (playerEntity.isPresent()) {
             val player = playerEntity.get();
-            return rememberPlayerAndReturnResponse(player);
+            return rememberPlayerAndReturnResponse(player, callback);
         } else {
             val player = this.playerEntityRepository.saveAndFlush(createPlayer(command));
-            return rememberPlayerAndReturnResponse(player);
+            return rememberPlayerAndReturnResponse(player, callback);
         }
     }
 
-    private String rememberPlayerAndReturnResponse(PlayerEntity player) {
+    private String rememberPlayerAndReturnResponse(PlayerEntity player, CommandCallback callback) {
         this.entityManager.detach(player);
         Players.addPlayer(player);
+        if (callback != null) {
+            callback.callback(player.getId());
+        }
         return String.format(RESPONSE_COMMAND,
                 player.getLevel(),
                 player.getExperience(),
