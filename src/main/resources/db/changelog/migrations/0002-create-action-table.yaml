@@ -1,0 +1,40 @@
+databaseChangeLog:
+- changeSet:
+    id: 0002-create-action-table
+    author: danila_dashko
+    changes:
+    - createTable:
+        tableName: action
+        columns:
+        - column:
+            name: id
+            type: serial
+            constraints:
+              primaryKey: true
+        - column:
+            name: type
+            type: text
+            constraints:
+              nullable: false
+        - column:
+            name: start_date
+            type: datetime
+            constraints:
+              nullable: false
+        - column:
+            name: end_date
+            type: datetime
+    - addColumn:
+        tableName: player
+        columns:
+        - column:
+            name: action_id
+            type: integer
+            constraints:
+              nullable: false
+    - addForeignKeyConstraint:
+        baseColumnNames: action_id
+        baseTableName: player
+        constraintName: fk_player_action
+        referencedColumnNames: id
+        referencedTableName: action

@@ -23,4 +23,8 @@ public class PlayerEntity {
 
     @Column(name = "experience")
     private int experience;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "action_id")
+    private ActionEntity actionEntity = new ActionEntity();
 }
