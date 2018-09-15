@@ -27,4 +27,20 @@ public class StorageEntity {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private StorageType type = StorageType.BASIC;
+
+    public void addSimpleSnowball() {
+        ++this.simpleSnowballs;
+    }
+
+    public void addMiddleSnowball() {
+        ++this.middleSnowballs;
+    }
+
+    public void addHardSnowball() {
+        ++this.hardSnowballs;
+    }
+
+    public int snowballsCount() {
+        return this.simpleSnowballs + this.middleSnowballs + this.hardSnowballs;
+    }
 }

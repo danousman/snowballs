@@ -1,5 +1,6 @@
 package kz.desh.snowballs.server.commands;
 
+import kz.desh.snowballs.server.control.ActionService;
 import kz.desh.snowballs.server.control.Experience;
 import kz.desh.snowballs.server.control.PlayerEntityRepository;
 import kz.desh.snowballs.server.control.Players;
@@ -19,11 +20,18 @@ import javax.transaction.Transactional;
 public class LoginCommand implements Command {
     public static final String COMMAND = "00001";
 
-    private static final int FIRST_LEVEL = 1;
-    private static final int START_EXPERIENCE = 0;
-    private static final String RESPONSE_COMMAND = COMMAND + " %d %d %d";
+    private static final String RESPONSE_COMMAND = COMMAND +
+            " %d" + //level
+            " %d" + //experience
+            " %d" + //experience to next level
+            " %d" + //simple snowballs
+            " %d" + //middle snowballs
+            " %d" + //hard snowballs
+            " %s" + //storage type
+            " %d";  //storage max size
 
     private final PlayerEntityRepository playerEntityRepository;
+    private final ActionService actionService;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -35,30 +43,40 @@ public class LoginCommand implements Command {
         val playerEntity = this.playerEntityRepository.findByLogin(command);
         if (playerEntity.isPresent()) {
             val player = playerEntity.get();
-            return rememberPlayerAndReturnResponse(player, callback);
+            rememberPlayer(player, callback);
+            this.actionService.doAction(player.getId());
+            return createResponse(player);
         } else {
             val player = this.playerEntityRepository.saveAndFlush(createPlayer(command));
-            return rememberPlayerAndReturnResponse(player, callback);
+            rememberPlayer(player, callback);
+            return createResponse(player);
         }
     }
 
-    private String rememberPlayerAndReturnResponse(PlayerEntity player, CommandCallback callback) {
+    private void rememberPlayer(PlayerEntity player, CommandCallback callback) {
         this.entityManager.detach(player);
         Players.addPlayer(player);
         if (callback != null) {
             callback.call(player.getId());
         }
+    }
+
+    private String createResponse(PlayerEntity player) {
+        val storage = player.getStorageEntity();
         return String.format(RESPONSE_COMMAND,
                 player.getLevel(),
                 player.getExperience(),
-                Experience.EXPERIENCE_FOR_NEXT_LEVEL.get(player.getLevel()));
+                Experience.EXPERIENCE_FOR_NEXT_LEVEL.get(player.getLevel()),
+                storage.getSimpleSnowballs(),
+                storage.getMiddleSnowballs(),
+                storage.getHardSnowballs(),
+                storage.getType(),
+                storage.getType().getSize());
     }
 
     private PlayerEntity createPlayer(String login) {
         val player = new PlayerEntity();
         player.setLogin(login);
-        player.setLevel(FIRST_LEVEL);
-        player.setExperience(START_EXPERIENCE);
         return player;
     }
 }

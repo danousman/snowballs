@@ -9,13 +9,13 @@ public final class Players {
     private Players() {
     }
 
-    private static Map<Long, PlayerEntity> players = new ConcurrentHashMap<>();
+    private static final Map<Long, PlayerEntity> players = new ConcurrentHashMap<>();
 
     public static void addPlayer(PlayerEntity playerEntity) {
         players.put(playerEntity.getId(), playerEntity);
     }
 
-    public static PlayerEntity getPlayer(Long playerId) {
+    static PlayerEntity getPlayer(Long playerId) {
         return players.get(playerId);
     }
 }

@@ -19,7 +19,7 @@ public class PlayerEntity {
     private String login;
 
     @Column(name = "level")
-    private int level;
+    private int level = 1;
 
     @Column(name = "experience")
     private int experience;
