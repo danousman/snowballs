@@ -1,0 +1,41 @@
+databaseChangeLog:
+- changeSet:
+    id: 0003-create-storage-table
+    author: danila_dashko
+    changes:
+    - createTable:
+        tableName: storage
+        columns:
+        - column:
+            name: id
+            type: serial
+            constraints:
+              primaryKey: true
+        - column:
+            name: simple_snowballs
+            type: integer
+        - column:
+            name: middle_snowballs
+            type: integer
+        - column:
+            name: hard_snowballs
+            type: integer
+        - column:
+            name: type
+            type: text
+            constraints:
+              nullable: false
+    - addColumn:
+        tableName: player
+        columns:
+        - column:
+            name: storage_id
+            type: integer
+            constraints:
+              nullable: false
+    - addForeignKeyConstraint:
+        baseColumnNames: storage_id
+        baseTableName: player
+        constraintName: fk_player_storage
+        referencedColumnNames: id
+        referencedTableName: storage

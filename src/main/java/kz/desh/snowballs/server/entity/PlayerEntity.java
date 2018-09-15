@@ -27,4 +27,8 @@ public class PlayerEntity {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "action_id")
     private ActionEntity actionEntity = new ActionEntity();
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "storage_id")
+    private StorageEntity storageEntity = new StorageEntity();
 }
