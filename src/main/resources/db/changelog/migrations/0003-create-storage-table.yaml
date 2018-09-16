@@ -21,6 +21,9 @@ databaseChangeLog:
             name: hard_snowballs
             type: integer
         - column:
+            name: icicles
+            type: integer
+        - column:
             name: type
             type: text
             constraints:

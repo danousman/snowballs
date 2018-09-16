@@ -24,6 +24,9 @@ public class StorageEntity {
     @Column(name = "hard_snowballs")
     private int hardSnowballs;
 
+    @Column(name = "icicles")
+    private int icicles;
+
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private StorageType type = StorageType.BASIC;
