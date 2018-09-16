@@ -41,4 +41,8 @@ public class PlayerEntity {
             new SkillEntity(ActionType.STRENGTH),
             new SkillEntity(ActionType.DODGE))
             .collect(Collectors.toSet());
+
+    public SkillEntity getSkill(ActionType skill) {
+        return this.skills.stream().filter(it -> it.getSkill() == skill).findFirst().get();
+    }
 }

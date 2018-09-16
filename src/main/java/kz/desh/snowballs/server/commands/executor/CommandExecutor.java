@@ -3,6 +3,7 @@ package kz.desh.snowballs.server.commands.executor;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.commands.LoginCommand;
+import kz.desh.snowballs.server.commands.SkillStudyCommand;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,11 @@ public class CommandExecutor {
     private final Map<String, Command> commands = new HashMap<>();
 
     @Autowired
-    public CommandExecutor(LoginCommand loginCommand) {
+    public CommandExecutor(
+            LoginCommand loginCommand,
+            SkillStudyCommand skillStudyCommand) {
         this.commands.put(LoginCommand.COMMAND, loginCommand);
+        this.commands.put(SkillStudyCommand.COMMAND, skillStudyCommand);
     }
 
     public String execute(Long playerId, String command, CommandCallback callback) {

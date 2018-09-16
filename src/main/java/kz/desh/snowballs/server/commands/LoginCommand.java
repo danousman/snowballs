@@ -21,14 +21,14 @@ public class LoginCommand implements Command {
     public static final String COMMAND = "00001";
 
     private static final String RESPONSE_COMMAND = COMMAND +
-            " %d" + //level
-            " %d" + //experience
-            " %d" + //experience to next level
-            " %d" + //simple snowballs
-            " %d" + //middle snowballs
-            " %d" + //hard snowballs
-            " %s" + //storage type
-            " %d";  //storage max size
+            " {}" + //level
+            " {}" + //experience
+            " {}" + //experience to next level
+            " {}" + //simple snowballs
+            " {}" + //middle snowballs
+            " {}" + //hard snowballs
+            " {}" + //storage type
+            " {}";  //storage max size
 
     private final PlayerEntityRepository playerEntityRepository;
     private final ActionService actionService;
@@ -44,7 +44,7 @@ public class LoginCommand implements Command {
         if (playerEntity.isPresent()) {
             val player = playerEntity.get();
             rememberPlayer(player, callback);
-            this.actionService.doAction(player.getId());
+            this.actionService.doAction(player);
             return createResponse(player);
         } else {
             val player = this.playerEntityRepository.saveAndFlush(createPlayer(command));

@@ -15,7 +15,7 @@ public final class Players {
         players.put(playerEntity.getId(), playerEntity);
     }
 
-    static PlayerEntity getPlayer(Long playerId) {
+    public static PlayerEntity getPlayer(Long playerId) {
         return players.get(playerId);
     }
 }

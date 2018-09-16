@@ -20,9 +20,6 @@ databaseChangeLog:
         - column:
             name: current_level
             type: integer
-        - column:
-            name: max_level
-            type: integer
     - addForeignKeyConstraint:
         baseColumnNames: player_id
         baseTableName: skill

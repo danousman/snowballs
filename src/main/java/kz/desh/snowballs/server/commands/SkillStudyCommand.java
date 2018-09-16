@@ -1,0 +1,29 @@
+package kz.desh.snowballs.server.commands;
+
+import kz.desh.snowballs.server.control.Players;
+import kz.desh.snowballs.server.control.SnowballsService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
+import org.springframework.stereotype.Component;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class SkillStudyCommand implements Command {
+    public static final String COMMAND = "00002";
+
+    private static final String RESPONSE_COMMAND = COMMAND +
+            " {}" + //start date
+            " {}";  //end date
+
+    private final SnowballsService snowballsService;
+
+    @Override
+    public String execute(Long playerId, String command, CommandCallback callback) {
+        log.info("Skill study command from client: {}", command);
+        val player = Players.getPlayer(playerId);
+        this.snowballsService.createSnowballs(player);
+        return null;
+    }
+}
