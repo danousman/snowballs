@@ -5,3 +5,5 @@ databaseChangeLog:
     file: /db/changelog/migrations/0002-create-action-table.yaml
 - include:
     file: /db/changelog/migrations/0003-create-storage-table.yaml
+- include:
+    file: /db/changelog/migrations/0004-create-skill-table.yaml

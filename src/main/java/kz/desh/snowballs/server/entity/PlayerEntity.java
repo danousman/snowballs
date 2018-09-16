@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Setter
 @Getter
@@ -31,4 +34,11 @@ public class PlayerEntity {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "storage_id")
     private StorageEntity storageEntity = new StorageEntity();
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private Set<SkillEntity> skills = Stream.of(
+            new SkillEntity(ActionType.PRECISION),
+            new SkillEntity(ActionType.STRENGTH),
+            new SkillEntity(ActionType.DODGE))
+            .collect(Collectors.toSet());
 }
