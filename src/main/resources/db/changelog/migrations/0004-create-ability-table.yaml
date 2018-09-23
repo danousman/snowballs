@@ -38,3 +38,24 @@ databaseChangeLog:
         - column:
             name: duration
             type: integer
+    - createTable:
+        tableName: player_abilities
+        columns:
+        - column:
+            name: player_id
+            type: integer
+        - column:
+            name: ability_id
+            type: integer
+    - addForeignKeyConstraint:
+        baseColumnNames: player_id
+        baseTableName: player_abilities
+        constraintName: fk_player_abilities_player
+        referencedColumnNames: id
+        referencedTableName: player
+    - addForeignKeyConstraint:
+        baseColumnNames: ability_id
+        baseTableName: player_abilities
+        constraintName: fk_player_abilities_ability
+        referencedColumnNames: id
+        referencedTableName: ability

@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Setter
 @Getter
@@ -33,6 +36,15 @@ public class PlayerEntity {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "storage_id")
     private StorageEntity storageEntity = new StorageEntity();
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "player_abilities",
+            joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "ability_id", referencedColumnName = "id")}
+    )
+    private Set<AbilityEntity> abilities = Stream.of(AbilityType.BIG_SNOWBALL.getAbility())
+            .collect(Collectors.toSet());
 
     public PlayerEntity(String login) {
         this.login = login;

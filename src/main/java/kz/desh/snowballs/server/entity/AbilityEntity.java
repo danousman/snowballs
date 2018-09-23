@@ -2,6 +2,7 @@ package kz.desh.snowballs.server.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ability")
 @EqualsAndHashCode
-public class AbilityEntity {
+@NoArgsConstructor
+class AbilityEntity {
     @Id
     @SequenceGenerator(name = "ability_id_seq_gen", sequenceName = "ability_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ability_id_seq_gen")
@@ -44,4 +46,14 @@ public class AbilityEntity {
 
     @Column(name = "duration")
     private int duration;
+
+    AbilityEntity(String nameRus, String nameEng, int maxLevel, int damage, int damagePerSecond, int intervalDamage, int duration) {
+        this.nameRus = nameRus;
+        this.nameEng = nameEng;
+        this.maxLevel = maxLevel;
+        this.damage = damage;
+        this.damagePerSecond = damagePerSecond;
+        this.intervalDamage = intervalDamage;
+        this.duration = duration;
+    }
 }
