@@ -1,0 +1,40 @@
+databaseChangeLog:
+- changeSet:
+    id: 0004-create-ability-table
+    author: danila_dashko
+    changes:
+    - createTable:
+        tableName: ability
+        columns:
+        - column:
+            name: id
+            type: serial
+            constraints:
+              primaryKey: true
+        - column:
+            name: name_rus
+            type: text
+        - column:
+            name: name_eng
+            type: text
+        - column:
+            name: type
+            type: text
+        - column:
+            name: current_level
+            type: integer
+        - column:
+            name: max_level
+            type: integer
+        - column:
+            name: damage
+            type: integer
+        - column:
+            name: damage_per_second
+            type: integer
+        - column:
+            name: interval_damage
+            type: integer
+        - column:
+            name: duration
+            type: integer

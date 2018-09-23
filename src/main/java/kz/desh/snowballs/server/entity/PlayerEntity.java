@@ -5,9 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Setter
 @Getter
@@ -37,18 +34,7 @@ public class PlayerEntity {
     @JoinColumn(name = "storage_id")
     private StorageEntity storageEntity = new StorageEntity();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private Set<SkillEntity> skills = Stream.of(
-            new SkillEntity(ActionType.PRECISION),
-            new SkillEntity(ActionType.STRENGTH),
-            new SkillEntity(ActionType.DODGE))
-            .collect(Collectors.toSet());
-
     public PlayerEntity(String login) {
         this.login = login;
-    }
-
-    public SkillEntity getSkill(ActionType skill) {
-        return this.skills.stream().filter(it -> it.getSkill() == skill).findFirst().get();
     }
 }

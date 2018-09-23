@@ -31,10 +31,9 @@ public class ClientHandler extends Thread {
              BufferedReader in = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()))) {
             listenCommands(in, out);
         } catch (SocketException e) {
-            log.warn("Connection finished");
             finishClientSession();
         } catch (IOException e) {
-            log.error("Exception occurred during cooperation with client");
+            log.error("Exception occurred during cooperation with client", e);
             finishClientSession();
         }
     }
