@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class SkillStudyCommand implements Command {
+public class StudySkillCommand implements Command {
     public static final String COMMAND = "00002";
 
     private static final String RESPONSE_COMMAND = COMMAND +
-            " {}" + //start date
-            " {}";  //end date
+            " %s" + //start date
+            " %s";  //end date
 
     private final SnowballsService snowballsService;
 

@@ -3,7 +3,7 @@ package kz.desh.snowballs.server.commands.executor;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.commands.LoginCommand;
-import kz.desh.snowballs.server.commands.SkillStudyCommand;
+import kz.desh.snowballs.server.commands.StudySkillCommand;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,9 @@ public class CommandExecutor {
     @Autowired
     public CommandExecutor(
             LoginCommand loginCommand,
-            SkillStudyCommand skillStudyCommand) {
+            StudySkillCommand studySkillCommand) {
         this.commands.put(LoginCommand.COMMAND, loginCommand);
-        this.commands.put(SkillStudyCommand.COMMAND, skillStudyCommand);
+        this.commands.put(StudySkillCommand.COMMAND, studySkillCommand);
     }
 
     public String execute(PlayerEntity player, String command, CommandCallback callback) {

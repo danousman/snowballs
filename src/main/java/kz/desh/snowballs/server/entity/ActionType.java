@@ -1,16 +1,12 @@
 package kz.desh.snowballs.server.entity;
 
 public enum ActionType {
-    FREE, PRECISION, STRENGTH, DODGE;
+    FREE, STUDY_SKILL;
 
     public ActionType of(String value) {
         switch (value) {
-            case "PRECISION":
-                return PRECISION;
-            case "STRENGTH":
-                return STRENGTH;
-            case "DODGE":
-                return DODGE;
+            case "STUDY_SKILL":
+                return STUDY_SKILL;
             default:
                 return FREE;
         }
