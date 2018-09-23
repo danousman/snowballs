@@ -24,13 +24,13 @@ public final class Skills {
         SKILLS.put(ActionType.DODGE, skillList);
     }
 
-    public static Optional<Skill> checkSkill(PlayerEntity player, ActionType skill) {
+    /*public static Optional<Skill> checkSkill(PlayerEntity player, ActionType skill) {
         val nextLevel = player.getSkill(skill).getCurrentLevel() + 1;
-    }
+    }*/
 
     @Getter
     @AllArgsConstructor
-    public static class Skill {
+    static class Skill {
         private int cost;
         private int time;
     }

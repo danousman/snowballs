@@ -1,6 +1,8 @@
 package kz.desh.snowballs.server;
 
 import kz.desh.snowballs.server.commands.executor.CommandExecutor;
+import kz.desh.snowballs.server.control.PlayerSaveService;
+import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
@@ -14,11 +16,14 @@ import java.net.SocketException;
 public class ClientHandler extends Thread {
     private CommandExecutor commandExecutor;
     private Socket clientSocket;
-    private Long playerId = null;
+    private PlayerSaveService playerSaveService;
 
-    ClientHandler(Socket socket, CommandExecutor commandExecutor) {
+    private PlayerEntity player;
+
+    ClientHandler(Socket socket, CommandExecutor commandExecutor, PlayerSaveService playerSaveService) {
         this.clientSocket = socket;
         this.commandExecutor = commandExecutor;
+        this.playerSaveService = playerSaveService;
     }
 
     public void run() {
@@ -30,16 +35,18 @@ public class ClientHandler extends Thread {
             finishClientSession();
         } catch (IOException e) {
             log.error("Exception occurred during cooperation with client");
+            finishClientSession();
         }
     }
 
     private void listenCommands(BufferedReader in, PrintWriter out) throws IOException {
         String command;
         while ((command = in.readLine()) != null) {
-            out.println(this.commandExecutor.execute(playerId, command, (args) -> this.playerId = Long.valueOf(args[0].toString())));
+            out.println(this.commandExecutor.execute(player, command, (args) -> this.player = (PlayerEntity) args[0]));
         }
     }
 
     private void finishClientSession() {
+        this.playerSaveService.savePlayer(this.player);
     }
 }

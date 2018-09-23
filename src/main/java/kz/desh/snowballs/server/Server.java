@@ -1,6 +1,7 @@
 package kz.desh.snowballs.server;
 
 import kz.desh.snowballs.server.commands.executor.CommandExecutor;
+import kz.desh.snowballs.server.control.PlayerSaveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class Server {
     private final CommandExecutor commandExecutor;
     private final ServerProps serverProps;
+    private final PlayerSaveService playerSaveService;
 
     private ServerSocket serverSocket;
 
@@ -31,7 +33,7 @@ public class Server {
     private void listenClients() {
         while (true) {
             try {
-                new ClientHandler(this.serverSocket.accept(), this.commandExecutor).start();
+                new ClientHandler(this.serverSocket.accept(), this.commandExecutor, this.playerSaveService).start();
             } catch (IOException e) {
                 log.error("Exception occurred during accept new socket.", e);
             }

@@ -12,13 +12,10 @@ databaseChangeLog:
             constraints:
               primaryKey: true
         - column:
-            name: simple_snowballs
+            name: snowballs
             type: integer
         - column:
-            name: middle_snowballs
-            type: integer
-        - column:
-            name: hard_snowballs
+            name: snowflakes
             type: integer
         - column:
             name: icicles

@@ -1,6 +1,7 @@
 package kz.desh.snowballs.server.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 @Getter
 @Entity
 @Table(name = "player")
+@NoArgsConstructor
 public class PlayerEntity {
     @Id
     @SequenceGenerator(name = "player_id_seq_gen", sequenceName = "player_id_seq", allocationSize = 1)
@@ -41,6 +43,10 @@ public class PlayerEntity {
             new SkillEntity(ActionType.STRENGTH),
             new SkillEntity(ActionType.DODGE))
             .collect(Collectors.toSet());
+
+    public PlayerEntity(String login) {
+        this.login = login;
+    }
 
     public SkillEntity getSkill(ActionType skill) {
         return this.skills.stream().filter(it -> it.getSkill() == skill).findFirst().get();

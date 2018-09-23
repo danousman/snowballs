@@ -15,14 +15,11 @@ public class StorageEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "storage_id_seq_gen")
     private long id;
 
-    @Column(name = "simple_snowballs")
-    private int simpleSnowballs;
+    @Column(name = "snowballs")
+    private int snowballs;
 
-    @Column(name = "middle_snowballs")
-    private int middleSnowballs;
-
-    @Column(name = "hard_snowballs")
-    private int hardSnowballs;
+    @Column(name = "snowflakes")
+    private int snowflakes;
 
     @Column(name = "icicles")
     private int icicles;
@@ -31,19 +28,15 @@ public class StorageEntity {
     @Enumerated(EnumType.STRING)
     private StorageType type = StorageType.BASIC;
 
-    public void addSimpleSnowball() {
-        ++this.simpleSnowballs;
+    public void addSnowball(int snowballs) {
+        this.snowballs += snowballs;
     }
 
-    public void addMiddleSnowball() {
-        ++this.middleSnowballs;
+    public void addSnowflakes(int snowflakes) {
+        this.snowflakes += snowflakes;
     }
 
-    public void addHardSnowball() {
-        ++this.hardSnowballs;
-    }
-
-    public int snowballsCount() {
-        return this.simpleSnowballs + this.middleSnowballs + this.hardSnowballs;
+    public void addIcicles(int icicles) {
+        this.icicles += icicles;
     }
 }

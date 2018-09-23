@@ -21,14 +21,14 @@ public class LoginCommand implements Command {
     public static final String COMMAND = "00001";
 
     private static final String RESPONSE_COMMAND = COMMAND +
-            " {}" + //level
-            " {}" + //experience
-            " {}" + //experience to next level
-            " {}" + //simple snowballs
-            " {}" + //middle snowballs
-            " {}" + //hard snowballs
-            " {}" + //storage type
-            " {}";  //storage max size
+            " %d" + //level
+            " %d" + //experience
+            " %d" + //experience to next level
+            " %d" + //snowballs
+            " %d" + //snowflakes
+            " %d" + //icicles
+            " %s" + //storage type
+            " %d";  //storage max size
 
     private final PlayerEntityRepository playerEntityRepository;
     private final ActionService actionService;
@@ -38,18 +38,18 @@ public class LoginCommand implements Command {
 
     @Transactional
     @Override
-    public String execute(Long playerId, String command, CommandCallback callback) {
+    public String execute(PlayerEntity player, String command, CommandCallback callback) {
         log.info("Login command from client: {}", command);
         val playerEntity = this.playerEntityRepository.findByLogin(command);
         if (playerEntity.isPresent()) {
-            val player = playerEntity.get();
-            rememberPlayer(player, callback);
-            this.actionService.doAction(player);
-            return createResponse(player);
+            val searchedPlayer = playerEntity.get();
+            rememberPlayer(searchedPlayer, callback);
+            this.actionService.doAction(searchedPlayer);
+            return createResponse(searchedPlayer);
         } else {
-            val player = this.playerEntityRepository.saveAndFlush(createPlayer(command));
-            rememberPlayer(player, callback);
-            return createResponse(player);
+            val newPlayer = this.playerEntityRepository.saveAndFlush(new PlayerEntity(command));
+            rememberPlayer(newPlayer, callback);
+            return createResponse(newPlayer);
         }
     }
 
@@ -57,7 +57,7 @@ public class LoginCommand implements Command {
         this.entityManager.detach(player);
         Players.addPlayer(player);
         if (callback != null) {
-            callback.call(player.getId());
+            callback.call(player);
         }
     }
 
@@ -66,17 +66,11 @@ public class LoginCommand implements Command {
         return String.format(RESPONSE_COMMAND,
                 player.getLevel(),
                 player.getExperience(),
-                Experience.EXPERIENCE_FOR_NEXT_LEVEL.get(player.getLevel()),
-                storage.getSimpleSnowballs(),
-                storage.getMiddleSnowballs(),
-                storage.getHardSnowballs(),
+                Experience.getExperienceForNextLevel(player.getLevel()),
+                storage.getSnowballs(),
+                storage.getSnowflakes(),
+                storage.getIcicles(),
                 storage.getType(),
                 storage.getType().getSize());
-    }
-
-    private PlayerEntity createPlayer(String login) {
-        val player = new PlayerEntity();
-        player.setLogin(login);
-        return player;
     }
 }

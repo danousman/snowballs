@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
-class PlayerSaveService {
+public class PlayerSaveService {
     private final PlayerEntityRepository playerEntityRepository;
 
     @PersistenceContext
@@ -19,7 +19,7 @@ class PlayerSaveService {
 
     @Async
     @Transactional
-    void savePlayer(PlayerEntity playerEntity) {
+    public void savePlayer(PlayerEntity playerEntity) {
         this.playerEntityRepository.saveAndFlush(playerEntity);
         this.entityManager.detach(playerEntity);
     }

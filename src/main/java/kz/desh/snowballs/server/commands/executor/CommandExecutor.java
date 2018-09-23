@@ -4,6 +4,7 @@ import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.commands.LoginCommand;
 import kz.desh.snowballs.server.commands.SkillStudyCommand;
+import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,9 +28,9 @@ public class CommandExecutor {
         this.commands.put(SkillStudyCommand.COMMAND, skillStudyCommand);
     }
 
-    public String execute(Long playerId, String command, CommandCallback callback) {
+    public String execute(PlayerEntity player, String command, CommandCallback callback) {
         val commandPrefix = command.substring(COMMAND_BEGIN_INDEX, COMMAND_END_INDEX);
         val commandPostfix = command.substring(COMMAND_BODY_START_INDEX);
-        return this.commands.get(commandPrefix).execute(playerId, commandPostfix, callback);
+        return this.commands.get(commandPrefix).execute(player, commandPostfix, callback);
     }
 }
