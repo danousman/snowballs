@@ -17,6 +17,6 @@ public enum AbilityType {
 
     public AbilityEntity getAbility() {
         this.ability.setType(this);
-        return ability;
+        return this.ability;
     }
 }

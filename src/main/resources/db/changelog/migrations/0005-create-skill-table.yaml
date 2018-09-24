@@ -1,0 +1,49 @@
+databaseChangeLog:
+- changeSet:
+    id: 0005-create-skill-table
+    author: danila_dashko
+    changes:
+    - createTable:
+        tableName: skill
+        columns:
+        - column:
+            name: id
+            type: serial
+            constraints:
+              primaryKey: true
+        - column:
+            name: name_rus
+            type: text
+        - column:
+            name: name_eng
+            type: text
+        - column:
+            name: type
+            type: text
+        - column:
+            name: current_level
+            type: integer
+        - column:
+            name: max_level
+            type: integer
+    - createTable:
+        tableName: player_skills
+        columns:
+        - column:
+            name: player_id
+            type: integer
+        - column:
+            name: skill_id
+            type: integer
+    - addForeignKeyConstraint:
+        baseColumnNames: player_id
+        baseTableName: player_skills
+        constraintName: fk_player_skills_player
+        referencedColumnNames: id
+        referencedTableName: player
+    - addForeignKeyConstraint:
+        baseColumnNames: skill_id
+        baseTableName: player_skills
+        constraintName: fk_player_skills_skill
+        referencedColumnNames: id
+        referencedTableName: skill

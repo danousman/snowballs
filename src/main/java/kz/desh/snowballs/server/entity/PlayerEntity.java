@@ -46,6 +46,15 @@ public class PlayerEntity {
     private Set<AbilityEntity> abilities = Stream.of(AbilityType.BIG_SNOWBALL.getAbility())
             .collect(Collectors.toSet());
 
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "player_skills",
+            joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id", referencedColumnName = "id")}
+    )
+    private Set<SkillEntity> skills = Stream.of(SkillType.DODGE.getSkill())
+            .collect(Collectors.toSet());
+
     public PlayerEntity(String login) {
         this.login = login;
     }
