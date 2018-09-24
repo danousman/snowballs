@@ -29,15 +29,15 @@ public class PlayerEntity {
     @Column(name = "experience")
     private int experience;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "action_id")
     private ActionEntity actionEntity = new ActionEntity();
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "storage_id")
     private StorageEntity storageEntity = new StorageEntity();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "player_abilities",
             joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
@@ -46,7 +46,7 @@ public class PlayerEntity {
     private Set<AbilityEntity> abilities = Stream.of(AbilityType.BIG_SNOWBALL.getAbility())
             .collect(Collectors.toSet());
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "player_skills",
             joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
@@ -57,5 +57,12 @@ public class PlayerEntity {
 
     public PlayerEntity(String login) {
         this.login = login;
+    }
+
+    public SkillEntity getSkill(SkillType type) {
+        return this.skills.stream()
+                .filter(value -> value.getType() == type)
+                .findFirst()
+                .get();
     }
 }

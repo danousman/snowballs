@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "skill")
 @EqualsAndHashCode
 @NoArgsConstructor
-class SkillEntity {
+public class SkillEntity {
     @Id
     @SequenceGenerator(name = "skill_id_seq_gen", sequenceName = "skill_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "skill_id_seq_gen")
@@ -39,5 +39,9 @@ class SkillEntity {
         this.nameRus = nameRus;
         this.nameEng = nameEng;
         this.maxLevel = maxLevel;
+    }
+
+    public boolean canStudyNewLevel() {
+        return currentLevel < maxLevel;
     }
 }

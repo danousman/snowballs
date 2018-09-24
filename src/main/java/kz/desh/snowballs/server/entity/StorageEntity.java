@@ -36,6 +36,10 @@ public class StorageEntity {
         this.snowflakes += snowflakes;
     }
 
+    public void minusSnowflakes(int snowflakes) {
+        this.snowflakes -= snowflakes;
+    }
+
     public void addIcicles(int icicles) {
         this.icicles += icicles;
     }
