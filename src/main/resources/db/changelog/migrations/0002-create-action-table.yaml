@@ -17,6 +17,9 @@ databaseChangeLog:
             constraints:
               nullable: false
         - column:
+            name: action_id
+            type: integer
+        - column:
             name: start_date
             type: datetime
             constraints:

@@ -45,6 +45,7 @@ public class StudySkillCommand implements Command {
             val startDate = LocalDateTime.now();
             val endDate = startDate.plusSeconds(skillEntity.getCurrentLevel() * skillType.getStudyTime());
             actionEntity.setType(ActionType.STUDY_SKILL);
+            actionEntity.setActionId(skillEntity.getId());
             actionEntity.setStartDate(startDate);
             actionEntity.setEndDate(endDate);
             storage.minusSnowflakes(needSnowflakes);

@@ -20,6 +20,9 @@ public class ActionEntity {
     @Enumerated(EnumType.STRING)
     private ActionType type = ActionType.FREE;
 
+    @Column(name = "action_id")
+    private Long actionId;
+
     @Column(name = "start_date")
     private LocalDateTime startDate = LocalDateTime.now();
 

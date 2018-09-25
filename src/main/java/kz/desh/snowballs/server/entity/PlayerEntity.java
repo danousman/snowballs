@@ -65,4 +65,11 @@ public class PlayerEntity {
                 .findFirst()
                 .get();
     }
+
+    public SkillEntity getSkill(Long skillId) {
+        return this.skills.stream()
+                .filter(value -> value.getId() == skillId)
+                .findFirst()
+                .get();
+    }
 }
