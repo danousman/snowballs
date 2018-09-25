@@ -1,10 +1,12 @@
 package kz.desh.snowballs.server.entity;
 
+import kz.desh.snowballs.server.control.GameProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Setter
 @Getter
@@ -27,5 +29,5 @@ public class ActionEntity {
     private LocalDateTime startDate = LocalDateTime.now();
 
     @Column(name = "end_date")
-    private LocalDateTime endDate;
+    private LocalDateTime endDate = LocalDateTime.now().plus(GameProperties.timeToCreateSnowball, ChronoUnit.MILLIS);
 }

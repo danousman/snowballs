@@ -22,7 +22,7 @@ class StudySkillService {
             skillEntity.increaseLevel();
             actionEntity.setType(ActionType.FREE);
             actionEntity.setStartDate(actionEntity.getEndDate());
-            actionEntity.setEndDate(null);
+            actionEntity.setEndDate(actionEntity.getEndDate().plusSeconds(GameProperties.timeToCreateSnowball));
             actionEntity.setActionId(null);
             this.snowballsService.createSnowballs(player);
         }

@@ -9,22 +9,24 @@ import java.time.temporal.ChronoUnit;
 
 @Service
 public class SnowballsService {
-    private static final int TIME_FOR_CREATE_SNOWBALL = 10000;
-
     public void createSnowballs(PlayerEntity player) {
         val currentTime = LocalDateTime.now();
-        val action = player.getActionEntity();
-        val storage = player.getStorageEntity();
-        val snowballsCount = storage.getSnowballs();
-        val storageTypeSize = storage.getType().getSize();
+        val actionEntity = player.getActionEntity();
+        val storageEntity = player.getStorageEntity();
+        val snowballs = storageEntity.getSnowballs();
+        val storageTypeSize = storageEntity.getType().getSize();
 
-        if (snowballsCount < storageTypeSize) {
-            val timePassed = action.getStartDate().until(currentTime, ChronoUnit.MILLIS);
-            val needToCreateSnowballs = Math.min((storageTypeSize - snowballsCount), longToInt(timePassed / TIME_FOR_CREATE_SNOWBALL));
-            storage.addSnowball(needToCreateSnowballs);
+        if (snowballs < storageTypeSize &&
+                currentTime.isAfter(actionEntity.getEndDate())) {
+            storageEntity.addSnowball(1);
+            val timePassed = actionEntity.getEndDate().until(currentTime, ChronoUnit.MILLIS);
+            val needToCreateSnowballs = Math.min((storageTypeSize - (snowballs + 1)), longToInt(timePassed / GameProperties.timeToCreateSnowball));
+            val timeRemainder = GameProperties.timeToCreateSnowball - (timePassed % GameProperties.timeToCreateSnowball);
+            storageEntity.addSnowball(needToCreateSnowballs);
+            actionEntity.setEndDate(currentTime.plus(timeRemainder, ChronoUnit.MILLIS));
         }
 
-        action.setStartDate(currentTime);
+        actionEntity.setStartDate(currentTime);
     }
 
     private static int longToInt(long value) {
