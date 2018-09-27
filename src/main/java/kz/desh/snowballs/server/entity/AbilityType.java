@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum AbilityType {
-    BIG_SNOWBALL(new AbilityEntity("Большой снежок", "Big snowball", 5, 15, 0, 0, 0), 10, 600);
+    BIG_SNOWBALL(new AbilityEntity("Большой снежок", "Big snowball", 5, 15, 0, 0, 0, 3), 10, 600);
 
     private final AbilityEntity ability;
 

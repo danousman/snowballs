@@ -38,6 +38,9 @@ databaseChangeLog:
         - column:
             name: duration
             type: integer
+        - column:
+            name: cooldown
+            type: integer
     - createTable:
         tableName: player_abilities
         columns:

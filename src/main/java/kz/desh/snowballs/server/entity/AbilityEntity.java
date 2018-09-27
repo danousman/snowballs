@@ -47,7 +47,10 @@ class AbilityEntity {
     @Column(name = "duration")
     private int duration;
 
-    AbilityEntity(String nameRus, String nameEng, int maxLevel, int damage, int damagePerSecond, int intervalDamage, int duration) {
+    @Column(name = "cooldown")
+    private int cooldown;
+
+    AbilityEntity(String nameRus, String nameEng, int maxLevel, int damage, int damagePerSecond, int intervalDamage, int duration, int cooldown) {
         this.nameRus = nameRus;
         this.nameEng = nameEng;
         this.maxLevel = maxLevel;
@@ -55,5 +58,6 @@ class AbilityEntity {
         this.damagePerSecond = damagePerSecond;
         this.intervalDamage = intervalDamage;
         this.duration = duration;
+        this.cooldown = cooldown;
     }
 }
