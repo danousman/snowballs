@@ -7,6 +7,7 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ class StudySkillService {
             skillEntity.increaseLevel();
             actionEntity.setType(ActionType.FREE);
             actionEntity.setStartDate(actionEntity.getEndDate());
-            actionEntity.setEndDate(actionEntity.getEndDate().plusSeconds(GameProperties.timeToCreateSnowball));
+            actionEntity.setEndDate(actionEntity.getEndDate().plus(GameProperties.timeToCreateSnowball, ChronoUnit.MILLIS));
             actionEntity.setActionId(null);
             this.snowballsService.createSnowballs(player);
         }
