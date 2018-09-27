@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum SkillType {
-    DODGE(new SkillEntity("Уклонение", "Dodge", 10), 0.5f, 10, 600);
+    DODGE(new SkillEntity("Уклонение", "Dodge", 10), 0.5f, 10, 600_000);
 
     private final SkillEntity skill;
 

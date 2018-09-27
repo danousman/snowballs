@@ -11,6 +11,7 @@ import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @Component
@@ -35,7 +36,8 @@ public class StudySkillCommand implements Command {
         val skillEntity = player.getSkill(skillType);
         val storageEntity = player.getStorageEntity();
         val actionEntity = player.getActionEntity();
-        val needSnowflakes = skillEntity.getCurrentLevel() * skillType.getLevelCost();
+        int currentLevel = skillEntity.getCurrentLevel();
+        val needSnowflakes = currentLevel * skillType.getLevelCost();
         val enoughSnowflakes = needSnowflakes < storageEntity.getSnowflakes();
 
         if (skillEntity.canStudyNewLevel() &&
@@ -43,7 +45,7 @@ public class StudySkillCommand implements Command {
                 actionEntity.getType() == ActionType.FREE) {
             this.snowballsService.createSnowballs(player);
             val startDate = LocalDateTime.now();
-            val endDate = startDate.plusSeconds(skillEntity.getCurrentLevel() * skillType.getStudyTime());
+            val endDate = startDate.plus(currentLevel * skillType.getStudyTime(), ChronoUnit.MILLIS);
             actionEntity.setType(ActionType.STUDY_SKILL);
             actionEntity.setActionId(skillEntity.getId());
             actionEntity.setStartDate(startDate);
