@@ -23,12 +23,7 @@ public class LoginCommand implements Command {
     private static final String RESPONSE_COMMAND = COMMAND +
             " %d" + //level
             " %d" + //experience
-            " %d" + //experience to next level
-            " %d" + //snowballs
-            " %d" + //snowflakes
-            " %d" + //icicles
-            " %s" + //storage type
-            " %d";  //storage max size
+            " %d";  //experience to next level
 
     private final PlayerEntityRepository playerEntityRepository;
     private final ActionService actionService;
@@ -62,15 +57,9 @@ public class LoginCommand implements Command {
     }
 
     private String createResponse(PlayerEntity player) {
-        val storage = player.getStorageEntity();
         return String.format(RESPONSE_COMMAND,
                 player.getLevel(),
                 player.getExperience(),
-                Experience.getExperienceForNextLevel(player.getLevel()),
-                storage.getSnowballs(),
-                storage.getSnowflakes(),
-                storage.getIcicles(),
-                storage.getType(),
-                storage.getType().getSize());
+                Experience.getExperienceForNextLevel(player.getLevel()));
     }
 }

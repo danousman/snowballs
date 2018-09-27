@@ -3,6 +3,7 @@ package kz.desh.snowballs.server.commands.executor;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.commands.LoginCommand;
+import kz.desh.snowballs.server.commands.RetrieveStorageCommand;
 import kz.desh.snowballs.server.commands.StudySkillCommand;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.val;
@@ -23,9 +24,11 @@ public class CommandExecutor {
     @Autowired
     public CommandExecutor(
             LoginCommand loginCommand,
-            StudySkillCommand studySkillCommand) {
+            StudySkillCommand studySkillCommand,
+            RetrieveStorageCommand retrieveStorageCommand) {
         this.commands.put(LoginCommand.COMMAND, loginCommand);
         this.commands.put(StudySkillCommand.COMMAND, studySkillCommand);
+        this.commands.put(RetrieveStorageCommand.COMMAND, retrieveStorageCommand);
     }
 
     public String execute(PlayerEntity player, String command, CommandCallback callback) {

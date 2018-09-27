@@ -33,10 +33,10 @@ public class StudySkillCommand implements Command {
         log.info("Skill study command from client: {}", command);
         val skillType = SkillType.valueOf(command);
         val skillEntity = player.getSkill(skillType);
-        val storage = player.getStorageEntity();
+        val storageEntity = player.getStorageEntity();
         val actionEntity = player.getActionEntity();
         val needSnowflakes = skillEntity.getCurrentLevel() * skillType.getLevelCost();
-        val enoughSnowflakes = needSnowflakes < storage.getSnowflakes();
+        val enoughSnowflakes = needSnowflakes < storageEntity.getSnowflakes();
 
         if (skillEntity.canStudyNewLevel() &&
                 enoughSnowflakes &&
@@ -48,7 +48,7 @@ public class StudySkillCommand implements Command {
             actionEntity.setActionId(skillEntity.getId());
             actionEntity.setStartDate(startDate);
             actionEntity.setEndDate(endDate);
-            storage.minusSnowflakes(needSnowflakes);
+            storageEntity.minusSnowflakes(needSnowflakes);
             this.playerSaveService.savePlayer(player);
             return createSuccessResponse(startDate, endDate);
         } else {
