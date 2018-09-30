@@ -14,4 +14,8 @@ public final class Players {
     public static void addPlayer(PlayerEntity playerEntity) {
         players.put(playerEntity.getId(), playerEntity);
     }
+
+    public static void removePlayer(PlayerEntity playerEntity) {
+        players.remove(playerEntity.getId());
+    }
 }

@@ -20,6 +20,7 @@ class StudySkillService {
 
         if (currentDate.isAfter(actionEntity.getEndDate())) {
             val skillEntity = player.getSkill(actionEntity.getActionId());
+            player.finishedAction(ActionType.STUDY_SKILL, skillEntity.getType().toString());
             skillEntity.increaseLevel();
             actionEntity.setType(ActionType.FREE);
             actionEntity.setStartDate(actionEntity.getEndDate());

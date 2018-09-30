@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.AbstractMap;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,6 +58,9 @@ public class PlayerEntity {
     private Set<SkillEntity> skills = Stream.of(SkillType.DODGE.getSkill())
             .collect(Collectors.toSet());
 
+    @Transient
+    private Map<ActionType, String> finishedAction;
+
     public PlayerEntity(String login) {
         this.login = login;
     }
@@ -71,5 +77,14 @@ public class PlayerEntity {
                 .filter(value -> value.getId() == skillId)
                 .findFirst()
                 .get();
+    }
+
+    public void finishedAction(ActionType actionType, String action) {
+        this.finishedAction = Collections.unmodifiableMap(Stream.of(new AbstractMap.SimpleEntry<>(actionType, action))
+                .collect(Collectors.toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue)));
+    }
+
+    public void removeFinishedAction() {
+        this.finishedAction = null;
     }
 }
