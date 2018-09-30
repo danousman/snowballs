@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "ability")
 @EqualsAndHashCode
 @NoArgsConstructor
-class AbilityEntity {
+public class AbilityEntity {
     @Id
     @SequenceGenerator(name = "ability_id_seq_gen", sequenceName = "ability_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ability_id_seq_gen")

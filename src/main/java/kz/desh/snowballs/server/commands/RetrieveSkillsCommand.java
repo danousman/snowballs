@@ -17,7 +17,7 @@ public class RetrieveSkillsCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Retrieve skill command from client: {}", command);
+        log.info("Retrieve skills command from client: {}", command);
         return createResponse(player);
     }
 
@@ -45,9 +45,9 @@ public class RetrieveSkillsCommand implements Command {
                                     type,
                                     currentLevel,
                                     skillEntity.getMaxLevel(),
-                                    (currentLevel * type.getBonus()),
-                                    (currentLevel * type.getLevelCost()),
-                                    (currentLevel * type.getStudyTime()));
+                                    currentLevel * type.getBonus(),
+                                    currentLevel * type.getLevelCost(),
+                                    currentLevel * type.getStudyTime());
                         })
                         .collect(Collectors.joining(" "))
         );
