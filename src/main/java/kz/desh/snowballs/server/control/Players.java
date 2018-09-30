@@ -14,8 +14,4 @@ public final class Players {
     public static void addPlayer(PlayerEntity playerEntity) {
         players.put(playerEntity.getId(), playerEntity);
     }
-
-    public static PlayerEntity getPlayer(Long playerId) {
-        return players.get(playerId);
-    }
 }

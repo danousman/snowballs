@@ -1,11 +1,6 @@
 package kz.desh.snowballs.server.commands.executor;
 
-import kz.desh.snowballs.server.commands.Command;
-import kz.desh.snowballs.server.commands.CommandCallback;
-import kz.desh.snowballs.server.commands.LoginCommand;
-import kz.desh.snowballs.server.commands.RetrieveSkillsCommand;
-import kz.desh.snowballs.server.commands.RetrieveStorageCommand;
-import kz.desh.snowballs.server.commands.StudySkillCommand;
+import kz.desh.snowballs.server.commands.*;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +22,14 @@ public class CommandExecutor {
             LoginCommand loginCommand,
             StudySkillCommand studySkillCommand,
             RetrieveStorageCommand retrieveStorageCommand,
-            RetrieveSkillsCommand retrieveSkillsCommand) {
+            RetrieveSkillsCommand retrieveSkillsCommand,
+            CancelStudySkillCommand cancelStudySkillCommand) {
+        //processes
         this.commands.put(LoginCommand.COMMAND, loginCommand);
         this.commands.put(StudySkillCommand.COMMAND, studySkillCommand);
+        this.commands.put(CancelStudySkillCommand.COMMAND, cancelStudySkillCommand);
+
+        //retrieve information
         this.commands.put(RetrieveStorageCommand.COMMAND, retrieveStorageCommand);
         this.commands.put(RetrieveSkillsCommand.COMMAND, retrieveSkillsCommand);
     }
