@@ -21,9 +21,10 @@ public class CommandExecutor {
     public CommandExecutor(
             LoginCommand loginCommand,
             StudySkillCommand studySkillCommand,
+            CancelStudySkillCommand cancelStudySkillCommand,
+            RetrieveActionCommand retrieveActionCommand,
             RetrieveStorageCommand retrieveStorageCommand,
-            RetrieveSkillsCommand retrieveSkillsCommand,
-            CancelStudySkillCommand cancelStudySkillCommand) {
+            RetrieveSkillsCommand retrieveSkillsCommand) {
         //processes
         this.commands.put(LoginCommand.COMMAND, loginCommand);
         this.commands.put(StudySkillCommand.COMMAND, studySkillCommand);
@@ -32,6 +33,7 @@ public class CommandExecutor {
         //retrieve information
         this.commands.put(RetrieveStorageCommand.COMMAND, retrieveStorageCommand);
         this.commands.put(RetrieveSkillsCommand.COMMAND, retrieveSkillsCommand);
+        this.commands.put(RetrieveActionCommand.COMMAND, retrieveActionCommand);
     }
 
     public String execute(PlayerEntity player, String command, CommandCallback callback) {

@@ -24,6 +24,8 @@ public class SnowballsService {
             val timeRemainder = GameProperties.timeToCreateSnowball - (timePassed % GameProperties.timeToCreateSnowball);
             storageEntity.addSnowball(needToCreateSnowballs);
             actionEntity.setEndDate(currentTime.plus(timeRemainder, ChronoUnit.MILLIS));
+        } else if (snowballs == storageTypeSize) {
+            actionEntity.setEndDate(currentTime.plus(GameProperties.timeToCreateSnowball, ChronoUnit.MILLIS));
         }
 
         actionEntity.setStartDate(currentTime);
