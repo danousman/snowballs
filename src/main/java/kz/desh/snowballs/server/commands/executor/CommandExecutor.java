@@ -23,6 +23,7 @@ public class CommandExecutor {
             StudySkillCommand studySkillCommand,
             CancelStudySkillCommand cancelStudySkillCommand,
             StudyAbilityCommand studyAbilityCommand,
+            CancelStudyAbilityCommand cancelStudyAbilityCommand,
             RetrieveActionCommand retrieveActionCommand,
             RetrieveStorageCommand retrieveStorageCommand,
             RetrieveSkillsCommand retrieveSkillsCommand,
@@ -33,6 +34,7 @@ public class CommandExecutor {
         this.commands.put(StudySkillCommand.COMMAND, studySkillCommand);
         this.commands.put(CancelStudySkillCommand.COMMAND, cancelStudySkillCommand);
         this.commands.put(StudyAbilityCommand.COMMAND, studyAbilityCommand);
+        this.commands.put(CancelStudyAbilityCommand.COMMAND, cancelStudyAbilityCommand);
 
         //retrieve information
         this.commands.put(RetrieveStorageCommand.COMMAND, retrieveStorageCommand);
