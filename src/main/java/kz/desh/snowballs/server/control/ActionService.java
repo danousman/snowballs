@@ -11,6 +11,7 @@ public class ActionService {
     private final SnowballsService snowballsService;
     private final PlayerSaveService playerSaveService;
     private final StudySkillService studySkillService;
+    private final StudyAbilityService studyAbilityService;
 
     public void doAction(PlayerEntity player) {
         val action = player.getActionEntity();
@@ -18,6 +19,9 @@ public class ActionService {
         switch (action.getType()) {
             case STUDY_SKILL:
                 this.studySkillService.studySkill(player);
+                break;
+            case STUDY_ABILITY:
+                this.studyAbilityService.studyAbility(player);
                 break;
             default:
                 this.snowballsService.createSnowballs(player);

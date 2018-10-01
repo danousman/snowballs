@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum AbilityType {
-    BIG_SNOWBALL(new AbilityEntity("Большой снежок", "Big snowball", 5, 15, 0, 0, 0, 3), 10, 600);
+    BIG_SNOWBALL(new AbilityEntity("Большой снежок", "Big snowball", 5, 15, 0, 0, 0, 3), 10, 600_000, 10);
 
     private final AbilityEntity ability;
 
@@ -14,6 +14,9 @@ public enum AbilityType {
 
     @Getter
     private final int studyTime;
+
+    @Getter
+    private final int damagePerLevel;
 
     public AbilityEntity getAbility() {
         this.ability.setType(this);

@@ -42,7 +42,7 @@ public class SkillEntity {
     }
 
     public boolean canStudyNewLevel() {
-        return currentLevel < maxLevel;
+        return this.currentLevel < this.maxLevel;
     }
 
     public void increaseLevel() {

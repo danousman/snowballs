@@ -60,4 +60,16 @@ public class AbilityEntity {
         this.duration = duration;
         this.cooldown = cooldown;
     }
+
+    public boolean canStudyNewLevel() {
+        return this.currentLevel < this.maxLevel;
+    }
+
+    public void increaseLevel() {
+        ++this.currentLevel;
+    }
+
+    public int getSummDamage() {
+        return this.damage + ((this.currentLevel - 1) * this.type.getDamagePerLevel());
+    }
 }

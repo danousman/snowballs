@@ -49,7 +49,7 @@ public class RetrieveAbilitiesCommand implements Command {
                                     type,
                                     currentLevel,
                                     abilityEntity.getMaxLevel(),
-                                    abilityEntity.getDamage(),
+                                    abilityEntity.getSummDamage(),
                                     abilityEntity.getDamagePerSecond(),
                                     abilityEntity.getIntervalDamage(),
                                     abilityEntity.getDuration(),

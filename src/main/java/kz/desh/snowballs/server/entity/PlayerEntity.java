@@ -87,4 +87,18 @@ public class PlayerEntity {
     public void removeFinishedAction() {
         this.finishedAction = null;
     }
+
+    public AbilityEntity getAbility(AbilityType type) {
+        return this.abilities.stream()
+                .filter(value -> value.getType() == type)
+                .findFirst()
+                .get();
+    }
+
+    public AbilityEntity getAbility(Long abilityId) {
+        return this.abilities.stream()
+                .filter(value -> value.getId() == abilityId)
+                .findFirst()
+                .get();
+    }
 }
