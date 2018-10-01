@@ -23,14 +23,14 @@ public class RetrieveSkillsCommand implements Command {
 
     private String createResponse(PlayerEntity player) {
         val skillCommand = "[" +
-                "%d," +   //id
-                "%s," +   //name rus
-                "%s," +   //name eng
-                "%s," +   //type
-                "%d," +   //current level
-                "%d," +   //max level
-                "%.2f," + //current bonus
-                "%d," +   //cost for the next level
+                "%d;" +   //id
+                "%s;" +   //name rus
+                "%s;" +   //name eng
+                "%s;" +   //type
+                "%d;" +   //current level
+                "%d;" +   //max level
+                "%.2f;" + //current bonus
+                "%d;" +   //cost for the next level
                 "%d" +    //study time for the next level
                 "]";
         return String.format(RESPONSE_COMMAND,
@@ -45,9 +45,9 @@ public class RetrieveSkillsCommand implements Command {
                                     type,
                                     currentLevel,
                                     skillEntity.getMaxLevel(),
-                                    currentLevel * type.getBonus(),
-                                    currentLevel * type.getLevelCost(),
-                                    currentLevel * type.getStudyTime());
+                                    type.getBonus(currentLevel),
+                                    type.getLevelCost(currentLevel + 1),
+                                    type.getStudyTime(currentLevel + 1));
                         })
                         .collect(Collectors.joining(" "))
         );

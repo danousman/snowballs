@@ -37,7 +37,7 @@ public class CancelStudySkillCommand implements Command {
         if (skillType == skillEntity.getType() &&
                 currentTime.isBefore(actionEntity.getEndDate())) {
             val storageEntity = player.getStorageEntity();
-            storageEntity.addSnowflakes(skillEntity.getCurrentLevel() * skillType.getLevelCost());
+            storageEntity.addSnowflakes(skillType.getLevelCost(skillEntity.getCurrentLevel() + 1));
             actionEntity.setType(ActionType.FREE);
             actionEntity.setStartDate(currentTime);
             actionEntity.setEndDate(currentTime.plus(GameProperties.timeToCreateSnowball, ChronoUnit.MILLIS));

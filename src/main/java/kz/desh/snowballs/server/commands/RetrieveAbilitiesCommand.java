@@ -23,18 +23,18 @@ public class RetrieveAbilitiesCommand implements Command {
 
     private String createResponse(PlayerEntity player) {
         val abilityCommand = "[" +
-                "%d," +   //id
-                "%s," +   //name rus
-                "%s," +   //name eng
-                "%s," +   //type
-                "%d," +   //current level
-                "%d," +   //max level
-                "%d," +   //damage
-                "%d," +   //damage per second
-                "%d," +   //interval damage
-                "%d," +   //duration
-                "%d," +   //cooldown
-                "%d," +   //cost for the next level
+                "%d;" +   //id
+                "%s;" +   //name rus
+                "%s;" +   //name eng
+                "%s;" +   //type
+                "%d;" +   //current level
+                "%d;" +   //max level
+                "%d;" +   //damage
+                "%d;" +   //damage per second
+                "%d;" +   //interval damage
+                "%d;" +   //duration
+                "%d;" +   //cooldown
+                "%d;" +   //cost for the next level
                 "%d" +    //study time for the next level
                 "]";
         return String.format(RESPONSE_COMMAND,
