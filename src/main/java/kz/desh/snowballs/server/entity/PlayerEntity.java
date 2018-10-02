@@ -1,23 +1,17 @@
 package kz.desh.snowballs.server.entity;
 
+import kz.desh.snowballs.server.entity.ability.AbilityEntity;
+import kz.desh.snowballs.server.entity.ability.AbilityType;
+import kz.desh.snowballs.server.entity.action.ActionEntity;
+import kz.desh.snowballs.server.entity.action.ActionType;
+import kz.desh.snowballs.server.entity.skill.SkillEntity;
+import kz.desh.snowballs.server.entity.skill.SkillType;
+import kz.desh.snowballs.server.entity.storage.StorageEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.Map;

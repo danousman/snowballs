@@ -1,9 +1,8 @@
-package kz.desh.snowballs.server.entity;
+package kz.desh.snowballs.server.entity.skill;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public enum SkillType {

@@ -1,4 +1,4 @@
-package kz.desh.snowballs.server.entity;
+package kz.desh.snowballs.server.entity.action;
 
 import kz.desh.snowballs.server.control.GameProperties;
 import lombok.Getter;

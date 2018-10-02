@@ -1,6 +1,6 @@
 package kz.desh.snowballs.server.control;
 
-import kz.desh.snowballs.server.entity.ItemEntity;
+import kz.desh.snowballs.server.entity.item.ItemEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

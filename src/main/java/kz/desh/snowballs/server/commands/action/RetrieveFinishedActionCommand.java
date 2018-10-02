@@ -2,8 +2,8 @@ package kz.desh.snowballs.server.commands.action;
 
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
-import kz.desh.snowballs.server.entity.ActionType;
 import kz.desh.snowballs.server.entity.PlayerEntity;
+import kz.desh.snowballs.server.entity.action.ActionType;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;

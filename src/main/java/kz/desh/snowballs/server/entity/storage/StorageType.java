@@ -1,4 +1,4 @@
-package kz.desh.snowballs.server.entity;
+package kz.desh.snowballs.server.entity.storage;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

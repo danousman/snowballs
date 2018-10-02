@@ -1,4 +1,4 @@
-package kz.desh.snowballs.server.entity;
+package kz.desh.snowballs.server.entity.skill;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

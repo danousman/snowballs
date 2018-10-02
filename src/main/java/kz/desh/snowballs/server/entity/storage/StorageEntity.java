@@ -1,6 +1,7 @@
-package kz.desh.snowballs.server.entity;
+package kz.desh.snowballs.server.entity.storage;
 
 import kz.desh.snowballs.server.control.Items;
+import kz.desh.snowballs.server.entity.item.ItemEntity;
 import lombok.Getter;
 import lombok.Setter;
 
