@@ -21,15 +21,15 @@ public enum SkillType {
     private Map<Integer, Level> initLevels() {
         val levels = new HashMap<Integer, Level>();
         levels.put(1, new Level(0.5f, 0, 0));
-        levels.put(2, new Level(1f, 10, 900_000));
-        levels.put(3, new Level(1.5f, 40, 2_700_000));
-        levels.put(4, new Level(2f, 160, 7_200_000));
-        levels.put(5, new Level(2.5f, 500, 21_600_000));
-        levels.put(6, new Level(3f, 1000, 43_200_000));
-        levels.put(7, new Level(3.5f, 2000, 86_400_000));
-        levels.put(8, new Level(4f, 4000, 172_800_000));
-        levels.put(9, new Level(4.5f, 8000, 259_200_000));
-        levels.put(10, new Level(5f, 16000, 345_600_000));
+        levels.put(2, new Level(1f, 10, 900_000));          //15 minutes
+        levels.put(3, new Level(1.5f, 40, 2_700_000));      //45 minutes
+        levels.put(4, new Level(2f, 160, 7_200_000));       //2 hours
+        levels.put(5, new Level(2.5f, 500, 21_600_000));    //6 hours
+        levels.put(6, new Level(3f, 1000, 43_200_000));     //12 hours
+        levels.put(7, new Level(3.5f, 2000, 86_400_000));   //1 day
+        levels.put(8, new Level(4f, 4000, 172_800_000));    //2 days
+        levels.put(9, new Level(4.5f, 8000, 259_200_000));  //3 days
+        levels.put(10, new Level(5f, 16000, 345_600_000));  //4 days
         return levels;
     }
 
