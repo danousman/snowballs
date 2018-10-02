@@ -4,7 +4,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.Map;
@@ -55,8 +68,10 @@ public class PlayerEntity {
             joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "skill_id", referencedColumnName = "id")}
     )
-    private Set<SkillEntity> skills = Stream.of(SkillType.DODGE.getSkill())
-            .collect(Collectors.toSet());
+    private Set<SkillEntity> skills = Stream.of(
+            SkillType.DODGE.getSkill(),
+            SkillType.STRENGTH.getSkill()
+    ).collect(Collectors.toSet());
 
     @Transient
     private Map<ActionType, String> finishedAction;
