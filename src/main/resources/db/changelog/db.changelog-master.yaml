@@ -9,3 +9,5 @@ databaseChangeLog:
     file: /db/changelog/migrations/0004-create-ability-table.yaml
 - include:
     file: /db/changelog/migrations/0005-create-skill-table.yaml
+- include:
+    file: /db/changelog/migrations/0006-create-item-table.yaml

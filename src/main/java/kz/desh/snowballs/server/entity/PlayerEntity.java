@@ -68,10 +68,9 @@ public class PlayerEntity {
             joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "skill_id", referencedColumnName = "id")}
     )
-    private Set<SkillEntity> skills = Stream.of(
-            SkillType.DODGE.getSkill(),
-            SkillType.STRENGTH.getSkill()
-    ).collect(Collectors.toSet());
+    private Set<SkillEntity> skills = Stream
+            .of(SkillType.DODGE.getSkill(), SkillType.STRENGTH.getSkill())
+            .collect(Collectors.toSet());
 
     @Transient
     private Map<ActionType, String> finishedAction;

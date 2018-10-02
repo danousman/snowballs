@@ -1,0 +1,52 @@
+databaseChangeLog:
+- changeSet:
+    id: 0006-create-item-table
+    author: danila_dashko
+    changes:
+    - createTable:
+        tableName: item
+        columns:
+        - column:
+            name: id
+            type: serial
+            constraints:
+              primaryKey: true
+        - column:
+            name: name_rus
+            type: text
+        - column:
+            name: name_eng
+            type: text
+        - column:
+            name: type
+            type: text
+        - column:
+            name: level
+            type: integer
+        - column:
+            name: heat
+            type: integer
+        - column:
+            name: dodge
+            type: real
+    - createTable:
+        tableName: storage_items
+        columns:
+        - column:
+            name: storage_id
+            type: integer
+        - column:
+            name: item_id
+            type: integer
+    - addForeignKeyConstraint:
+        baseColumnNames: storage_id
+        baseTableName: storage_items
+        constraintName: fk_storage_items_storage
+        referencedColumnNames: id
+        referencedTableName: storage
+    - addForeignKeyConstraint:
+        baseColumnNames: item_id
+        baseTableName: storage_items
+        constraintName: fk_storage_items_item
+        referencedColumnNames: id
+        referencedTableName: item
