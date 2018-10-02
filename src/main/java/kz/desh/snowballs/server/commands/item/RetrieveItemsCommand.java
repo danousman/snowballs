@@ -1,5 +1,7 @@
-package kz.desh.snowballs.server.commands;
+package kz.desh.snowballs.server.commands.item;
 
+import kz.desh.snowballs.server.commands.Command;
+import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.control.Items;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.RequiredArgsConstructor;

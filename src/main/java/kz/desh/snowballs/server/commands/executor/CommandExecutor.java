@@ -1,6 +1,17 @@
 package kz.desh.snowballs.server.commands.executor;
 
 import kz.desh.snowballs.server.commands.*;
+import kz.desh.snowballs.server.commands.ability.CancelStudyAbilityCommand;
+import kz.desh.snowballs.server.commands.ability.RetrieveAbilitiesCommand;
+import kz.desh.snowballs.server.commands.ability.StudyAbilityCommand;
+import kz.desh.snowballs.server.commands.action.RetrieveActionCommand;
+import kz.desh.snowballs.server.commands.action.RetrieveFinishedActionCommand;
+import kz.desh.snowballs.server.commands.item.RetrieveItemsCommand;
+import kz.desh.snowballs.server.commands.skill.CancelStudySkillCommand;
+import kz.desh.snowballs.server.commands.skill.RetrieveSkillsCommand;
+import kz.desh.snowballs.server.commands.skill.StudySkillCommand;
+import kz.desh.snowballs.server.commands.storage.RetrieveStorageCommand;
+import kz.desh.snowballs.server.commands.storage.RetrieveStorageItemsCommand;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
