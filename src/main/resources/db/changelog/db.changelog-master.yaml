@@ -11,3 +11,5 @@ databaseChangeLog:
     file: /db/changelog/migrations/0005-create-skill-table.yaml
 - include:
     file: /db/changelog/migrations/0006-create-item-table.yaml
+- include:
+    file: /db/changelog/migrations/0007-add-basic-plain-clothes.yaml

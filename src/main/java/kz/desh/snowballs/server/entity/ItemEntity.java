@@ -5,15 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -23,8 +15,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class ItemEntity {
     @Id
-    @SequenceGenerator(name = "item_id_seq_gen", sequenceName = "item_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_seq_gen")
     private long id;
 
     @Column(name = "name_rus")
