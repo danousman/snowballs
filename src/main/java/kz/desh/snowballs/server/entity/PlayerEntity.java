@@ -4,6 +4,7 @@ import kz.desh.snowballs.server.entity.ability.AbilityEntity;
 import kz.desh.snowballs.server.entity.ability.AbilityType;
 import kz.desh.snowballs.server.entity.action.ActionEntity;
 import kz.desh.snowballs.server.entity.action.ActionType;
+import kz.desh.snowballs.server.entity.item.ItemEntity;
 import kz.desh.snowballs.server.entity.skill.SkillEntity;
 import kz.desh.snowballs.server.entity.skill.SkillType;
 import kz.desh.snowballs.server.entity.storage.StorageEntity;
@@ -12,10 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.AbstractMap;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -65,6 +63,14 @@ public class PlayerEntity {
     private Set<SkillEntity> skills = Stream
             .of(SkillType.DODGE.getSkill(), SkillType.STRENGTH.getSkill())
             .collect(Collectors.toSet());
+
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "player_clothes",
+            joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")}
+    )
+    private List<ItemEntity> clothes = new ArrayList<>();
 
     @Transient
     private Map<ActionType, String> finishedAction;

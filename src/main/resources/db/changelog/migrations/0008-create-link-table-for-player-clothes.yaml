@@ -1,0 +1,26 @@
+databaseChangeLog:
+- changeSet:
+    id: 0008-create-link-table-for-player-clothes
+    author: danila_dashko
+    changes:
+    - createTable:
+        tableName: player_clothes
+        columns:
+        - column:
+            name: player_id
+            type: integer
+        - column:
+            name: item_id
+            type: integer
+    - addForeignKeyConstraint:
+        baseColumnNames: player_id
+        baseTableName: player_clothes
+        constraintName: fk_player_clothes_player
+        referencedColumnNames: id
+        referencedTableName: player
+    - addForeignKeyConstraint:
+        baseColumnNames: item_id
+        baseTableName: player_clothes
+        constraintName: fk_player_clothes_item
+        referencedColumnNames: id
+        referencedTableName: item
