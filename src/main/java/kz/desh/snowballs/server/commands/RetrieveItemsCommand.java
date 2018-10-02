@@ -18,8 +18,6 @@ public class RetrieveItemsCommand implements Command {
     private static final String RESPONSE_COMMAND = COMMAND +
             " %s"; //items
 
-    private final Items items;
-
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
         log.info("Retrieve items command from client: {}", command);
@@ -37,7 +35,7 @@ public class RetrieveItemsCommand implements Command {
                 "%.1f" +  //dodge
                 "]";
         return String.format(RESPONSE_COMMAND,
-                this.items.getItems().values().stream()
+                Items.getItems().values().stream()
                         .map(itemEntity -> String.format(itemCommand,
                                 itemEntity.getId(),
                                 itemEntity.getNameRus(),

@@ -1,23 +1,13 @@
 package kz.desh.snowballs.server.entity;
 
+import kz.desh.snowballs.server.control.Items;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Setter
 @Getter
@@ -42,13 +32,19 @@ public class StorageEntity {
     @Enumerated(EnumType.STRING)
     private StorageType type = StorageType.BASIC;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinTable(
             name = "storage_items",
             joinColumns = {@JoinColumn(name = "storage_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")}
     )
-    private Set<ItemEntity> items;
+    private Set<ItemEntity> items = Stream
+            .of(Items.getItem(1L),
+                    Items.getItem(2L),
+                    Items.getItem(3L),
+                    Items.getItem(4L),
+                    Items.getItem(5L))
+            .collect(Collectors.toSet());
 
     public void addSnowball(int snowballs) {
         this.snowballs += snowballs;
