@@ -144,4 +144,14 @@ public class PlayerEntity {
         }
         return takeOffItem;
     }
+
+    public ItemEntity takeOffClothes(long itemId) {
+        ItemEntity takeOffItem = null;
+        for (int i = 0; i < this.clothes.size(); i++) {
+            if (itemId == this.clothes.get(i).getId()) {
+                takeOffItem = this.clothes.remove(i);
+            }
+        }
+        return takeOffItem;
+    }
 }

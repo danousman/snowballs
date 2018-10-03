@@ -7,6 +7,7 @@ import kz.desh.snowballs.server.commands.action.RetrieveActionCommand;
 import kz.desh.snowballs.server.commands.action.RetrieveFinishedActionCommand;
 import kz.desh.snowballs.server.commands.item.PutOnClothesCommand;
 import kz.desh.snowballs.server.commands.item.RetrieveItemsCommand;
+import kz.desh.snowballs.server.commands.item.TakeOffClothesCommand;
 import kz.desh.snowballs.server.commands.skill.CancelStudySkillCommand;
 import kz.desh.snowballs.server.commands.skill.RetrieveSkillsCommand;
 import kz.desh.snowballs.server.commands.skill.StudySkillCommand;
@@ -36,6 +37,7 @@ public class CommandExecutor {
             StudyAbilityCommand studyAbilityCommand,
             CancelStudyAbilityCommand cancelStudyAbilityCommand,
             PutOnClothesCommand putOnClothesCommand,
+            TakeOffClothesCommand takeOffClothesCommand,
 
             RetrieveActionCommand retrieveActionCommand,
             RetrieveStorageCommand retrieveStorageCommand,
@@ -51,6 +53,7 @@ public class CommandExecutor {
         this.commands.put(StudyAbilityCommand.COMMAND, studyAbilityCommand);
         this.commands.put(CancelStudyAbilityCommand.COMMAND, cancelStudyAbilityCommand);
         this.commands.put(PutOnClothesCommand.COMMAND, putOnClothesCommand);
+        this.commands.put(TakeOffClothesCommand.COMMAND, takeOffClothesCommand);
 
         //retrieve information
         this.commands.put(RetrieveStorageCommand.COMMAND, retrieveStorageCommand);
