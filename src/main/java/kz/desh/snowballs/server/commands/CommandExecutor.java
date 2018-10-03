@@ -1,11 +1,11 @@
-package kz.desh.snowballs.server.commands.executor;
+package kz.desh.snowballs.server.commands;
 
-import kz.desh.snowballs.server.commands.*;
 import kz.desh.snowballs.server.commands.ability.CancelStudyAbilityCommand;
 import kz.desh.snowballs.server.commands.ability.RetrieveAbilitiesCommand;
 import kz.desh.snowballs.server.commands.ability.StudyAbilityCommand;
 import kz.desh.snowballs.server.commands.action.RetrieveActionCommand;
 import kz.desh.snowballs.server.commands.action.RetrieveFinishedActionCommand;
+import kz.desh.snowballs.server.commands.item.PutOnClothesCommand;
 import kz.desh.snowballs.server.commands.item.RetrieveItemsCommand;
 import kz.desh.snowballs.server.commands.skill.CancelStudySkillCommand;
 import kz.desh.snowballs.server.commands.skill.RetrieveSkillsCommand;
@@ -35,6 +35,8 @@ public class CommandExecutor {
             CancelStudySkillCommand cancelStudySkillCommand,
             StudyAbilityCommand studyAbilityCommand,
             CancelStudyAbilityCommand cancelStudyAbilityCommand,
+            PutOnClothesCommand putOnClothesCommand,
+
             RetrieveActionCommand retrieveActionCommand,
             RetrieveStorageCommand retrieveStorageCommand,
             RetrieveSkillsCommand retrieveSkillsCommand,
@@ -48,6 +50,7 @@ public class CommandExecutor {
         this.commands.put(CancelStudySkillCommand.COMMAND, cancelStudySkillCommand);
         this.commands.put(StudyAbilityCommand.COMMAND, studyAbilityCommand);
         this.commands.put(CancelStudyAbilityCommand.COMMAND, cancelStudyAbilityCommand);
+        this.commands.put(PutOnClothesCommand.COMMAND, putOnClothesCommand);
 
         //retrieve information
         this.commands.put(RetrieveStorageCommand.COMMAND, retrieveStorageCommand);

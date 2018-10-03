@@ -12,8 +12,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -114,5 +132,16 @@ public class PlayerEntity {
                 .filter(value -> value.getId() == abilityId)
                 .findFirst()
                 .get();
+    }
+
+    public ItemEntity putOnClothes(ItemEntity itemEntity) {
+        ItemEntity takeOffItem = null;
+        for (int i = 0; i < this.clothes.size(); i++) {
+            if (itemEntity.getType() == this.clothes.get(i).getType()) {
+                takeOffItem = this.clothes.get(i);
+                this.clothes.add(i, itemEntity);
+            }
+        }
+        return takeOffItem;
     }
 }
