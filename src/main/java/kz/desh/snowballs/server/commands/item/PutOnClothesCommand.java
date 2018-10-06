@@ -23,8 +23,6 @@ public class PutOnClothesCommand implements Command {
     private static final String RESPONSE_COMMAND = COMMAND +
             " %s"; //status (OK, FAIL)
 
-    private final PlayerSaveService playerSaveService;
-
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
         log.info("Put on clothes command from client: {}", command);
@@ -46,7 +44,6 @@ public class PutOnClothesCommand implements Command {
             val itemToStorage = player.putOnClothes(itemFromStorage);
             storageEntity.addItem(itemToStorage);
             storageEntity.removeItem(itemFromStorage);
-            this.playerSaveService.savePlayer(player);
             return createSuccessResponse();
         } else {
             return createFailResponse();

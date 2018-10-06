@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ActionService {
     private final SnowballsService snowballsService;
-    private final PlayerSaveService playerSaveService;
     private final StudySkillService studySkillService;
     private final StudyAbilityService studyAbilityService;
 
@@ -27,7 +26,5 @@ public class ActionService {
                 this.snowballsService.createSnowballs(player);
                 break;
         }
-
-        this.playerSaveService.savePlayer(player);
     }
 }

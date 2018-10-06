@@ -3,7 +3,6 @@ package kz.desh.snowballs.server.commands.item;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.control.Items;
-import kz.desh.snowballs.server.control.PlayerSaveService;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +22,6 @@ public class TakeOffClothesCommand implements Command {
     private static final String RESPONSE_COMMAND = COMMAND +
             " %s"; //status (OK, FAIL)
 
-    private final PlayerSaveService playerSaveService;
-
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
         log.info("Take off clothes command from client: {}", command);
@@ -41,7 +38,6 @@ public class TakeOffClothesCommand implements Command {
             }
 
             player.getStorageEntity().addItem(takeOffItem);
-            this.playerSaveService.savePlayer(player);
             return createSuccessResponse();
         }
     }

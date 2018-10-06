@@ -3,7 +3,6 @@ package kz.desh.snowballs.server.commands.skill;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.control.GameProperties;
-import kz.desh.snowballs.server.control.PlayerSaveService;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import kz.desh.snowballs.server.entity.action.ActionType;
 import kz.desh.snowballs.server.entity.skill.SkillType;
@@ -26,8 +25,6 @@ public class CancelStudySkillCommand implements Command {
     private static final String RESPONSE_COMMAND = COMMAND +
             " %s"; //status (OK, FAIL)
 
-    private final PlayerSaveService playerSaveService;
-
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
         log.info("Cancel study skill command from client: {}", command);
@@ -44,7 +41,6 @@ public class CancelStudySkillCommand implements Command {
             actionEntity.setStartDate(currentTime);
             actionEntity.setEndDate(currentTime.plus(GameProperties.timeToCreateSnowball, ChronoUnit.MILLIS));
             actionEntity.setActionId(null);
-            this.playerSaveService.savePlayer(player);
             return createResponse(OK_STATUS);
         } else {
             return createResponse(FAIL_STATUS);

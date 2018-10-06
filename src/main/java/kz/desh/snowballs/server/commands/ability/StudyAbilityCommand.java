@@ -2,7 +2,6 @@ package kz.desh.snowballs.server.commands.ability;
 
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
-import kz.desh.snowballs.server.control.PlayerSaveService;
 import kz.desh.snowballs.server.control.SnowballsService;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import kz.desh.snowballs.server.entity.ability.AbilityType;
@@ -29,7 +28,6 @@ public class StudyAbilityCommand implements Command {
             " %s";  //end date
 
     private final SnowballsService snowballsService;
-    private final PlayerSaveService playerSaveService;
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
@@ -53,7 +51,6 @@ public class StudyAbilityCommand implements Command {
             actionEntity.setStartDate(startDate);
             actionEntity.setEndDate(endDate);
             storageEntity.minusSnowflakes(needSnowflakes);
-            this.playerSaveService.savePlayer(player);
             return createSuccessResponse(startDate, endDate);
         } else {
             return createFailResponse();
