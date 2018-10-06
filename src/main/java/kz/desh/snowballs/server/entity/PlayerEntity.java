@@ -1,5 +1,6 @@
 package kz.desh.snowballs.server.entity;
 
+import kz.desh.snowballs.server.control.Items;
 import kz.desh.snowballs.server.entity.ability.AbilityEntity;
 import kz.desh.snowballs.server.entity.ability.AbilityType;
 import kz.desh.snowballs.server.entity.action.ActionEntity;
@@ -11,27 +12,10 @@ import kz.desh.snowballs.server.entity.storage.StorageEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.val;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -69,7 +53,9 @@ public class PlayerEntity {
             joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "ability_id", referencedColumnName = "id")}
     )
-    private Set<AbilityEntity> abilities = Stream.of(AbilityType.BIG_SNOWBALL.getAbility())
+    private Set<AbilityEntity> abilities = Stream
+            .of(
+                    new AbilityEntity("Большой снежок", "Big snowball", AbilityType.BIG_SNOWBALL, 5, 15, 0, 0, 0, 3))
             .collect(Collectors.toSet());
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -79,16 +65,15 @@ public class PlayerEntity {
             inverseJoinColumns = {@JoinColumn(name = "skill_id", referencedColumnName = "id")}
     )
     private Set<SkillEntity> skills = Stream
-            .of(SkillType.DODGE.getSkill(), SkillType.STRENGTH.getSkill())
+            .of(
+                    new SkillEntity("Уклонение", "Dodge", SkillType.DODGE, 10),
+                    new SkillEntity("Сила броска", "Throw strength", SkillType.STRENGTH, 10))
             .collect(Collectors.toSet());
 
-    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "player_clothes",
-            joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")}
-    )
-    private List<ItemEntity> clothes = new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "player_clothes", joinColumns = @JoinColumn(name = "player_id"))
+    @Column(name = "item_id")
+    private Set<Long> clothes = new HashSet<>();
 
     @Transient
     private Map<ActionType, String> finishedAction;
@@ -135,23 +120,29 @@ public class PlayerEntity {
     }
 
     public ItemEntity putOnClothes(ItemEntity itemEntity) {
-        ItemEntity takeOffItem = null;
-        for (int i = 0; i < this.clothes.size(); i++) {
-            if (itemEntity.getType() == this.clothes.get(i).getType()) {
-                takeOffItem = this.clothes.get(i);
-                this.clothes.add(i, itemEntity);
-            }
+        val takeOffItem = this.clothes.stream()
+                .filter(it -> Items.getItem(it).getType() == itemEntity.getType())
+                .findFirst()
+                .orElse(null);
+
+        if (Objects.isNull(takeOffItem)) {
+            this.clothes.add(itemEntity.getId());
+        } else {
+            this.clothes.removeIf(it -> Items.getItem(it).getType() == itemEntity.getType());
         }
-        return takeOffItem;
+
+        return Items.getItem(takeOffItem);
     }
 
     public ItemEntity takeOffClothes(long itemId) {
-        ItemEntity takeOffItem = null;
-        for (int i = 0; i < this.clothes.size(); i++) {
-            if (itemId == this.clothes.get(i).getId()) {
-                takeOffItem = this.clothes.remove(i);
-            }
+        val takeOffItem = this.clothes.stream()
+                .filter(it -> it == itemId)
+                .findFirst()
+                .orElse(null);
+
+        if (!Objects.isNull(takeOffItem)) {
+            this.clothes.removeIf(it -> it == itemId);
         }
-        return takeOffItem;
+        return Items.getItem(takeOffItem);
     }
 }

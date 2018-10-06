@@ -35,9 +35,10 @@ public class SkillEntity {
     @Column(name = "max_level")
     private int maxLevel;
 
-    SkillEntity(String nameRus, String nameEng, int maxLevel) {
+    public SkillEntity(String nameRus, String nameEng, SkillType type, int maxLevel) {
         this.nameRus = nameRus;
         this.nameEng = nameEng;
+        this.type = type;
         this.maxLevel = maxLevel;
     }
 

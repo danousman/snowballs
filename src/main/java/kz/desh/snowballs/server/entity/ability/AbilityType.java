@@ -1,25 +1,24 @@
 package kz.desh.snowballs.server.entity.ability;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Map;
 
 @RequiredArgsConstructor
 public enum AbilityType {
-    BIG_SNOWBALL(new AbilityEntity("Большой снежок", "Big snowball", 5, 15, 0, 0, 0, 3), 10, 600_000, 10);
+    BIG_SNOWBALL(AbilityLevels.BIG_SNOWBALL_LEVELS);
 
-    private final AbilityEntity ability;
+    private final Map<Integer, AbilityLevels.Level> levels;
 
-    @Getter
-    private final int levelCost;
+    public int getDamage(int level) {
+        return this.levels.get(level).getDamage();
+    }
 
-    @Getter
-    private final int studyTime;
+    public int getLevelCost(int level) {
+        return this.levels.get(level).getLevelCost();
+    }
 
-    @Getter
-    private final int damagePerLevel;
-
-    public AbilityEntity getAbility() {
-        this.ability.setType(this);
-        return this.ability;
+    public int getStudyTime(int level) {
+        return this.levels.get(level).getStudyTime();
     }
 }

@@ -29,17 +29,23 @@ public class PutOnClothesCommand implements Command {
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
         log.info("Put on clothes command from client: {}", command);
         val itemId = Long.valueOf(command);
-        val existedItem = Items.getItem(itemId);
+        val existedItem = Items.exists(itemId);
+
+        if (!existedItem) {
+            return createFailResponse();
+        }
+
         val storageEntity = player.getStorageEntity();
         val itemFromStorage = storageEntity.getItem(itemId);
 
-        if (Objects.isNull(existedItem) || Objects.isNull(itemFromStorage)) {
+        if (Objects.isNull(itemFromStorage)) {
             return createFailResponse();
         }
 
         if (player.getLevel() >= itemFromStorage.getLevel()) {
             val itemToStorage = player.putOnClothes(itemFromStorage);
             storageEntity.addItem(itemToStorage);
+            storageEntity.removeItem(itemFromStorage);
             this.playerSaveService.savePlayer(player);
             return createSuccessResponse();
         } else {

@@ -43,6 +43,7 @@ public class RetrieveAbilitiesCommand implements Command {
                 player.getAbilities().stream()
                         .map(abilityEntity -> {
                             val currentLevel = abilityEntity.getCurrentLevel();
+                            val nextLevel = currentLevel + 1;
                             val type = abilityEntity.getType();
                             return String.format(abilityCommand,
                                     abilityEntity.getId(),
@@ -56,8 +57,8 @@ public class RetrieveAbilitiesCommand implements Command {
                                     abilityEntity.getIntervalDamage(),
                                     abilityEntity.getDuration(),
                                     abilityEntity.getCooldown(),
-                                    currentLevel * type.getLevelCost(),
-                                    currentLevel * type.getStudyTime());
+                                    type.getLevelCost(nextLevel),
+                                    type.getStudyTime(nextLevel));
                         })
                         .collect(Collectors.joining(" "))
         );

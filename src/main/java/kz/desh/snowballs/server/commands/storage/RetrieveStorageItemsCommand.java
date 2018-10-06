@@ -2,6 +2,7 @@ package kz.desh.snowballs.server.commands.storage;
 
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
+import kz.desh.snowballs.server.control.Items;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,9 @@ public class RetrieveStorageItemsCommand implements Command {
                 "]";
         return String.format(RESPONSE_COMMAND,
                 player.getStorageEntity().getItems().stream()
+                        .map(Items::getItem)
+                        .collect(Collectors.toSet())
+                        .stream()
                         .map(itemEntity -> String.format(itemCommand,
                                 itemEntity.getId(),
                                 itemEntity.getNameRus(),

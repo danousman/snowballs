@@ -50,9 +50,10 @@ public class AbilityEntity {
     @Column(name = "cooldown")
     private int cooldown;
 
-    AbilityEntity(String nameRus, String nameEng, int maxLevel, int damage, int damagePerSecond, int intervalDamage, int duration, int cooldown) {
+    public AbilityEntity(String nameRus, String nameEng, AbilityType type, int maxLevel, int damage, int damagePerSecond, int intervalDamage, int duration, int cooldown) {
         this.nameRus = nameRus;
         this.nameEng = nameEng;
+        this.type = type;
         this.maxLevel = maxLevel;
         this.damage = damage;
         this.damagePerSecond = damagePerSecond;
@@ -70,6 +71,6 @@ public class AbilityEntity {
     }
 
     public int getSummDamage() {
-        return this.damage + ((this.currentLevel - 1) * this.type.getDamagePerLevel());
+        return this.damage + this.type.getDamage(this.currentLevel);
     }
 }

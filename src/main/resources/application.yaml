@@ -7,6 +7,10 @@ spring:
     password: root
     minimumIdle: 5
     maximumPoolSize: 50
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
 
 snowballs:
   server:

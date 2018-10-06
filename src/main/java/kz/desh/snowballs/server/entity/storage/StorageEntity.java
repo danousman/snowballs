@@ -5,20 +5,7 @@ import kz.desh.snowballs.server.entity.item.ItemEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -47,18 +34,11 @@ public class StorageEntity {
     @Enumerated(EnumType.STRING)
     private StorageType type = StorageType.BASIC;
 
-    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "storage_items",
-            joinColumns = {@JoinColumn(name = "storage_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")}
-    )
-    private Set<ItemEntity> items = Stream
-            .of(Items.getItem(1L),
-                    Items.getItem(2L),
-                    Items.getItem(3L),
-                    Items.getItem(4L),
-                    Items.getItem(5L))
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "storage_items", joinColumns = @JoinColumn(name = "storage_id"))
+    @Column(name = "item_id")
+    private Set<Long> items = Stream
+            .of(1L, 2L, 3L, 4L, 5L)
             .collect(Collectors.toSet());
 
     public void addSnowball(int snowballs) {
@@ -78,15 +58,19 @@ public class StorageEntity {
     }
 
     public ItemEntity getItem(long itemId) {
-        return this.items.stream()
-                .filter(item -> item.getId() == itemId)
+        return Items.getItem(this.items.stream()
+                .filter(item -> item == itemId)
                 .findFirst()
-                .orElse(null);
+                .orElse(null));
     }
 
     public void addItem(ItemEntity item) {
         if (!Objects.isNull(item)) {
-            this.items.add(item);
+            this.items.add(item.getId());
         }
+    }
+
+    public void removeItem(ItemEntity item) {
+        this.items.removeIf(it -> it == item.getId());
     }
 }

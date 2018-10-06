@@ -1,21 +1,15 @@
 package kz.desh.snowballs.server.entity.skill;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
+@RequiredArgsConstructor
 public enum SkillType {
-    DODGE(new SkillEntity("Уклонение", "Dodge", 10), SkillLevels.DEFAULT_LEVELS),
-    STRENGTH(new SkillEntity("Сила броска", "Throw strength", 10), SkillLevels.DEFAULT_LEVELS);
+    DODGE(SkillLevels.DEFAULT_LEVELS),
+    STRENGTH(SkillLevels.DEFAULT_LEVELS);
 
-    private final SkillEntity skill;
-    private final Map<Integer, Level> levels;
-
-    SkillType(SkillEntity skill, Map<Integer, Level> levels) {
-        this.skill = skill;
-        this.levels = levels;
-    }
+    private final Map<Integer, SkillLevels.Level> levels;
 
     public int getLevelCost(int level) {
         return this.levels.get(level).getLevelCost();
@@ -27,18 +21,5 @@ public enum SkillType {
 
     public float getBonus(int level) {
         return this.levels.get(level).getBonus();
-    }
-
-    public SkillEntity getSkill() {
-        this.skill.setType(this);
-        return this.skill;
-    }
-
-    @Getter
-    @AllArgsConstructor
-    public static class Level {
-        private final float bonus;
-        private final int levelCost;
-        private final int studyTime;
     }
 }

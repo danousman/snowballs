@@ -38,8 +38,8 @@ public class StudyAbilityCommand implements Command {
         val abilityEntity = player.getAbility(abilityType);
         val storageEntity = player.getStorageEntity();
         val actionEntity = player.getActionEntity();
-        int currentLevel = abilityEntity.getCurrentLevel();
-        val needSnowflakes = currentLevel * abilityType.getLevelCost();
+        int nextLevel = abilityEntity.getCurrentLevel() + 1;
+        val needSnowflakes = abilityType.getLevelCost(nextLevel);
         val enoughSnowflakes = needSnowflakes < storageEntity.getSnowflakes();
 
         if (abilityEntity.canStudyNewLevel() &&
@@ -47,7 +47,7 @@ public class StudyAbilityCommand implements Command {
                 actionEntity.getType() == ActionType.FREE) {
             this.snowballsService.createSnowballs(player);
             val startDate = LocalDateTime.now();
-            val endDate = startDate.plus(currentLevel * abilityType.getStudyTime(), ChronoUnit.MILLIS);
+            val endDate = startDate.plus(abilityType.getStudyTime(nextLevel), ChronoUnit.MILLIS);
             actionEntity.setType(ActionType.STUDY_ABILITY);
             actionEntity.setActionId(abilityEntity.getId());
             actionEntity.setStartDate(startDate);
