@@ -4,9 +4,9 @@ import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.control.Items;
 import kz.desh.snowballs.server.entity.PlayerEntity;
+import kz.desh.snowballs.server.entity.item.ItemEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -27,28 +27,13 @@ public class RetrieveStorageItemsCommand implements Command {
     }
 
     private String createResponse(PlayerEntity player) {
-        val itemCommand = "[" +
-                "%d;" +   //id
-                "%s;" +   //name rus
-                "%s;" +   //name eng
-                "%s;" +   //type
-                "%d;" +   //level
-                "%d;" +   //heat
-                "%.1f" +  //dodge
-                "]";
         return String.format(RESPONSE_COMMAND,
                 player.getStorageEntity().getItems().stream()
                         .map(Items::getItem)
                         .collect(Collectors.toSet())
                         .stream()
-                        .map(itemEntity -> String.format(itemCommand,
-                                itemEntity.getId(),
-                                itemEntity.getNameRus(),
-                                itemEntity.getNameEng(),
-                                itemEntity.getType(),
-                                itemEntity.getLevel(),
-                                itemEntity.getHeat(),
-                                itemEntity.getDodge()))
+                        .map(ItemEntity::getId)
+                        .map(Object::toString)
                         .collect(Collectors.joining(" "))
         );
     }
