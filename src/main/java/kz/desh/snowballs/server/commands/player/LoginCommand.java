@@ -1,5 +1,7 @@
-package kz.desh.snowballs.server.commands;
+package kz.desh.snowballs.server.commands.player;
 
+import kz.desh.snowballs.server.commands.Command;
+import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.control.ActionService;
 import kz.desh.snowballs.server.control.Experience;
 import kz.desh.snowballs.server.control.PlayerEntityRepository;
