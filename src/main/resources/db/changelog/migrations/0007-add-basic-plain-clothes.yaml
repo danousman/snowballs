@@ -4,12 +4,12 @@ databaseChangeLog:
     author: danila_dashko
     changes:
     - sql:
-        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (1, 'Обычная шапка', 'Plain hat', 'HAT', 1, 0, 0)
+        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (1, 'Обычная шапка', 'Plain hat', 'HAT', 1, 5, 0.5)
     - sql:
-        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (2, 'Обычная куртка', 'Plain jacket', 'JACKET', 1, 0, 0)
+        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (2, 'Обычная куртка', 'Plain jacket', 'JACKET', 1, 10, 1)
     - sql:
-        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (3, 'Обычные варежки', 'Plain mittens', 'MITTENS', 1, 0, 0)
+        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (3, 'Обычные варежки', 'Plain mittens', 'MITTENS', 1, 5, 0.5)
     - sql:
-        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (4, 'Обычные штаны', 'Plain pants', 'PANTS', 1, 0, 0)
+        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (4, 'Обычные штаны', 'Plain pants', 'PANTS', 1, 10, 1)
     - sql:
-        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (5, 'Обычная обувь', 'Plain shoes', 'SHOES', 1, 0, 0)
+        sql: INSERT INTO item (id, name_rus, name_eng, type, level, heat, dodge) VALUES (5, 'Обычная обувь', 'Plain shoes', 'SHOES', 1, 5, 0.5)

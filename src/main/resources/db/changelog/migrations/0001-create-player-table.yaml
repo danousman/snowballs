@@ -26,6 +26,12 @@ databaseChangeLog:
             type: integer
             constraints:
               nullable: false
+        - column:
+            name: heat
+            type: integer
+        - column:
+            name: dodge
+            type: real
     - createIndex:
         columns:
         - column:

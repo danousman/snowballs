@@ -39,6 +39,12 @@ public class PlayerEntity {
     @Column(name = "experience")
     private int experience;
 
+    @Column(name = "heat")
+    private int heat = 50;
+
+    @Column(name = "dodge")
+    private float dodge = 30f;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "action_id")
     private ActionEntity actionEntity = new ActionEntity();
