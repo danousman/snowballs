@@ -2,7 +2,7 @@ package kz.desh.snowballs.server.commands.ability;
 
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
-import kz.desh.snowballs.server.control.SnowballsService;
+import kz.desh.snowballs.server.control.snowball.SnowballsService;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import kz.desh.snowballs.server.entity.ability.AbilityType;
 import kz.desh.snowballs.server.entity.action.ActionType;

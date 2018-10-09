@@ -1,5 +1,8 @@
-package kz.desh.snowballs.server.control;
+package kz.desh.snowballs.server.control.action;
 
+import kz.desh.snowballs.server.control.ability.StudyAbilityService;
+import kz.desh.snowballs.server.control.skill.StudySkillService;
+import kz.desh.snowballs.server.control.snowball.SnowballsService;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.val;

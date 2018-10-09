@@ -1,13 +1,12 @@
-package kz.desh.snowballs.server.control;
+package kz.desh.snowballs.server.control.player;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public final class Experience {
+public final class PlayerExperience {
     private static final Map<Integer, Integer> EXPERIENCE_FOR_NEXT_LEVEL = new HashMap<>();
 
     static {
-        EXPERIENCE_FOR_NEXT_LEVEL.put(1, 10);
         EXPERIENCE_FOR_NEXT_LEVEL.put(2, 20);
         EXPERIENCE_FOR_NEXT_LEVEL.put(3, 40);
         EXPERIENCE_FOR_NEXT_LEVEL.put(4, 80);
@@ -19,7 +18,7 @@ public final class Experience {
         EXPERIENCE_FOR_NEXT_LEVEL.put(10, 5120);
     }
 
-    private Experience() {
+    private PlayerExperience() {
     }
 
     public static int getExperienceForNextLevel(int level) {

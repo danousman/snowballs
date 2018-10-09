@@ -1,8 +1,8 @@
 package kz.desh.snowballs.server;
 
 import kz.desh.snowballs.server.commands.CommandExecutor;
-import kz.desh.snowballs.server.control.PlayerSaveService;
-import kz.desh.snowballs.server.control.Players;
+import kz.desh.snowballs.server.control.player.PlayerSaveService;
+import kz.desh.snowballs.server.control.player.Players;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,5 +1,7 @@
-package kz.desh.snowballs.server.control;
+package kz.desh.snowballs.server.control.skill;
 
+import kz.desh.snowballs.server.control.GameProperties;
+import kz.desh.snowballs.server.control.snowball.SnowballsService;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import kz.desh.snowballs.server.entity.action.ActionType;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +13,10 @@ import java.time.temporal.ChronoUnit;
 
 @Service
 @RequiredArgsConstructor
-class StudySkillService {
+public class StudySkillService {
     private final SnowballsService snowballsService;
 
-    void studySkill(PlayerEntity player) {
+    public void studySkill(PlayerEntity player) {
         val currentDate = LocalDateTime.now();
         val actionEntity = player.getActionEntity();
 

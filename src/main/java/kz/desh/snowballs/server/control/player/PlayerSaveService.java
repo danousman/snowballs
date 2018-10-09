@@ -1,5 +1,6 @@
-package kz.desh.snowballs.server.control;
+package kz.desh.snowballs.server.control.player;
 
+import kz.desh.snowballs.server.control.player.PlayerEntityRepository;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;

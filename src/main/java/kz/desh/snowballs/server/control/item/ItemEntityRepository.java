@@ -1,4 +1,4 @@
-package kz.desh.snowballs.server.control;
+package kz.desh.snowballs.server.control.item;
 
 import kz.desh.snowballs.server.entity.item.ItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

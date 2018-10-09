@@ -1,6 +1,6 @@
 package kz.desh.snowballs.server.entity;
 
-import kz.desh.snowballs.server.control.Items;
+import kz.desh.snowballs.server.control.item.Items;
 import kz.desh.snowballs.server.entity.ability.AbilityEntity;
 import kz.desh.snowballs.server.entity.ability.AbilityType;
 import kz.desh.snowballs.server.entity.action.ActionEntity;

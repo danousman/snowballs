@@ -2,10 +2,10 @@ package kz.desh.snowballs.server.commands.player;
 
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
-import kz.desh.snowballs.server.control.ActionService;
-import kz.desh.snowballs.server.control.Experience;
-import kz.desh.snowballs.server.control.PlayerEntityRepository;
-import kz.desh.snowballs.server.control.Players;
+import kz.desh.snowballs.server.control.action.ActionService;
+import kz.desh.snowballs.server.control.player.PlayerExperience;
+import kz.desh.snowballs.server.control.player.PlayerEntityRepository;
+import kz.desh.snowballs.server.control.player.Players;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +62,6 @@ public class LoginCommand implements Command {
         return String.format(RESPONSE_COMMAND,
                 player.getLevel(),
                 player.getExperience(),
-                Experience.getExperienceForNextLevel(player.getLevel()));
+                PlayerExperience.getExperienceForNextLevel(player.getLevel() + 1));
     }
 }

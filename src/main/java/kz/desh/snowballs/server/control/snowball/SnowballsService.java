@@ -1,5 +1,6 @@
-package kz.desh.snowballs.server.control;
+package kz.desh.snowballs.server.control.snowball;
 
+import kz.desh.snowballs.server.control.GameProperties;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.val;
 import org.springframework.stereotype.Service;
