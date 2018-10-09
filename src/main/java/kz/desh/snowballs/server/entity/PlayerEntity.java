@@ -84,6 +84,9 @@ public class PlayerEntity {
     @Transient
     private Map<ActionType, String> finishedAction;
 
+    @Column(name = "rating")
+    private int rating;
+
     public PlayerEntity(String login) {
         this.login = login;
     }

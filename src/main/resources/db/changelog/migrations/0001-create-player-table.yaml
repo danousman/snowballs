@@ -32,6 +32,9 @@ databaseChangeLog:
         - column:
             name: dodge
             type: real
+        - column:
+            name: rating
+            type: integer
     - createIndex:
         columns:
         - column:
