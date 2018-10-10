@@ -20,8 +20,6 @@ import java.time.temporal.ChronoUnit;
 public class CancelStudySkillCommand implements Command {
     public static final String COMMAND = "00003";
 
-    private static final String OK_STATUS = "OK";
-    private static final String FAIL_STATUS = "FAIL";
     private static final String RESPONSE_COMMAND = COMMAND +
             " %s"; //status (OK, FAIL)
 
