@@ -4,11 +4,9 @@ import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.control.battle.BattleQueue;
 import kz.desh.snowballs.server.entity.PlayerEntity;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 
-@Slf4j
 @Component
 public class StartSearchBattleCommand implements Command {
     public static final String COMMAND = "20001";
@@ -18,7 +16,6 @@ public class StartSearchBattleCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Start search battle command from client: {}", command);
         BattleQueue.addPlayer(player);
         return createResponse();
     }

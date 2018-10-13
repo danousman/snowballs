@@ -6,13 +6,11 @@ import kz.desh.snowballs.server.control.item.Items;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import kz.desh.snowballs.server.entity.item.ItemEntity;
 import kz.desh.snowballs.server.entity.skill.SkillType;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
-@Slf4j
 @Component
 public class RetrievePlayerCharacteristicsCommand implements Command {
     public static final String COMMAND = "10009";
@@ -24,7 +22,6 @@ public class RetrievePlayerCharacteristicsCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Retrieve player characteristics command from client: {}", command);
         return createResponse(player);
     }
 

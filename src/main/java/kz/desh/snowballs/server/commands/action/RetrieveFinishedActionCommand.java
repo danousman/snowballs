@@ -4,14 +4,12 @@ import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import kz.desh.snowballs.server.entity.action.ActionType;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Objects;
 
-@Slf4j
 @Component
 public class RetrieveFinishedActionCommand implements Command {
     public static final String COMMAND = "10005";
@@ -22,7 +20,6 @@ public class RetrieveFinishedActionCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Retrieve finished action command from client: {}", command);
         return createResponse(player);
     }
 

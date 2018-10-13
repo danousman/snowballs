@@ -7,14 +7,12 @@ import kz.desh.snowballs.server.entity.PlayerEntity;
 import kz.desh.snowballs.server.entity.action.ActionType;
 import kz.desh.snowballs.server.entity.skill.SkillType;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CancelStudySkillCommand implements Command {
@@ -25,7 +23,6 @@ public class CancelStudySkillCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Cancel study skill command from client: {}", command);
         val currentTime = LocalDateTime.now();
         val skillType = SkillType.valueOf(command);
         val actionEntity = player.getActionEntity();

@@ -3,13 +3,11 @@ package kz.desh.snowballs.server.commands.ability;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.entity.PlayerEntity;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
-@Slf4j
 @Component
 public class RetrieveAbilitiesCommand implements Command {
     public static final String COMMAND = "10004";
@@ -19,7 +17,6 @@ public class RetrieveAbilitiesCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Retrieve abilities command from client: {}", command);
         return createResponse(player);
     }
 

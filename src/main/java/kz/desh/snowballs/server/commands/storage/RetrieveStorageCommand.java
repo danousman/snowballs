@@ -3,11 +3,9 @@ package kz.desh.snowballs.server.commands.storage;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.entity.PlayerEntity;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @Component
 public class RetrieveStorageCommand implements Command {
     public static final String COMMAND = "10001";
@@ -21,7 +19,6 @@ public class RetrieveStorageCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Retrieve storage command from client: {}", command);
         return createResponse(player);
     }
 

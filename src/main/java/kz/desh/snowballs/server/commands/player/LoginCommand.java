@@ -3,12 +3,11 @@ package kz.desh.snowballs.server.commands.player;
 import kz.desh.snowballs.server.commands.Command;
 import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.control.action.ActionService;
-import kz.desh.snowballs.server.control.player.PlayerExperience;
 import kz.desh.snowballs.server.control.player.PlayerEntityRepository;
+import kz.desh.snowballs.server.control.player.PlayerExperience;
 import kz.desh.snowballs.server.control.player.Players;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class LoginCommand implements Command {
@@ -36,7 +34,6 @@ public class LoginCommand implements Command {
     @Transactional
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Login command from client: {}", command);
         val playerEntity = this.playerEntityRepository.findByLogin(command);
         if (playerEntity.isPresent()) {
             val searchedPlayer = playerEntity.get();

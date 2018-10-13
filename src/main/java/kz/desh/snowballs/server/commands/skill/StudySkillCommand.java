@@ -7,14 +7,12 @@ import kz.desh.snowballs.server.entity.PlayerEntity;
 import kz.desh.snowballs.server.entity.action.ActionType;
 import kz.desh.snowballs.server.entity.skill.SkillType;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class StudySkillCommand implements Command {
@@ -29,7 +27,6 @@ public class StudySkillCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Skill study command from client: {}", command);
         val skillType = SkillType.valueOf(command);
         val skillEntity = player.getSkill(skillType);
         val storageEntity = player.getStorageEntity();

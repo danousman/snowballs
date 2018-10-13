@@ -5,13 +5,11 @@ import kz.desh.snowballs.server.commands.CommandCallback;
 import kz.desh.snowballs.server.control.item.Items;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class RetrieveItemsCommand implements Command {
@@ -22,7 +20,6 @@ public class RetrieveItemsCommand implements Command {
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {
-        log.info("Retrieve items command from client: {}", command);
         return createResponse();
     }
 
