@@ -37,6 +37,8 @@ public class ClientHandler extends Thread {
             log.error("Exception occurred during cooperation with client", e);
             finishClientSession();
         }
+
+        finishClientSession();
     }
 
     private void listenCommands(BufferedReader in, PrintWriter out) throws IOException {

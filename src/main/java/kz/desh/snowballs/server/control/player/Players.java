@@ -3,6 +3,7 @@ package kz.desh.snowballs.server.control.player;
 import kz.desh.snowballs.server.entity.PlayerEntity;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class Players {
@@ -16,6 +17,8 @@ public final class Players {
     }
 
     public static void removePlayer(PlayerEntity playerEntity) {
-        players.remove(playerEntity.getId());
+        if (Objects.nonNull(playerEntity)) {
+            players.remove(playerEntity.getId());
+        }
     }
 }
