@@ -36,6 +36,8 @@ public class RetrieveActionCommand implements Command {
         switch (actionType) {
             case STUDY_SKILL:
                 return player.getSkill(actionId).getType().toString();
+            case STUDY_ABILITY:
+                return player.getAbility(actionId).getType().toString();
             default:
                 return ActionType.FREE.toString();
         }
