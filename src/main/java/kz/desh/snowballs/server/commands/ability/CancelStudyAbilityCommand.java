@@ -26,6 +26,11 @@ public class CancelStudyAbilityCommand implements Command {
         val currentTime = LocalDateTime.now();
         val abilityType = AbilityType.valueOf(command);
         val actionEntity = player.getActionEntity();
+
+        if (ActionType.FREE == actionEntity.getType()) {
+            return createResponse(FAIL_STATUS);
+        }
+
         val abilityEntity = player.getAbility(actionEntity.getActionId());
 
         if (abilityType == abilityEntity.getType() &&
