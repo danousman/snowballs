@@ -21,4 +21,8 @@ public final class Players {
             players.remove(playerEntity.getId());
         }
     }
+
+    public static PlayerEntity getPlayer(long playerId) {
+        return players.get(playerId);
+    }
 }

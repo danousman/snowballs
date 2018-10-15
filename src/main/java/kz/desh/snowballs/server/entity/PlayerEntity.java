@@ -1,5 +1,6 @@
 package kz.desh.snowballs.server.entity;
 
+import kz.desh.snowballs.server.control.battle.OneToOneBattle;
 import kz.desh.snowballs.server.control.item.Items;
 import kz.desh.snowballs.server.entity.ability.AbilityEntity;
 import kz.desh.snowballs.server.entity.ability.AbilityType;
@@ -15,6 +16,7 @@ import lombok.Setter;
 import lombok.val;
 
 import javax.persistence.*;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -81,11 +83,17 @@ public class PlayerEntity {
     @Column(name = "item_id")
     private Set<Long> clothes = new HashSet<>();
 
+    @Column(name = "rating")
+    private int rating;
+
     @Transient
     private Map<ActionType, String> finishedAction;
 
-    @Column(name = "rating")
-    private int rating;
+    @Transient
+    private PrintWriter out;
+
+    @Transient
+    private OneToOneBattle battle;
 
     public PlayerEntity(String login) {
         this.login = login;
@@ -153,5 +161,32 @@ public class PlayerEntity {
             this.clothes.removeIf(it -> it == itemId);
         }
         return Items.getItem(takeOffItem);
+    }
+
+    public int getAllHeat() {
+        val clothes = this.clothes.stream()
+                .map(Items::getItem)
+                .collect(Collectors.toSet());
+        val clothesHeat = clothes.stream()
+                .mapToInt(ItemEntity::getHeat)
+                .sum();
+        return this.heat + clothesHeat;
+    }
+
+    public double getAllDodge() {
+        val clothes = this.clothes.stream()
+                .map(Items::getItem)
+                .collect(Collectors.toSet());
+        val clothesDodge = clothes.stream()
+                .mapToDouble(ItemEntity::getDodge)
+                .sum();
+        val skillDodgeEntity = getSkill(SkillType.DODGE);
+        val skillDodge = skillDodgeEntity.getType().getBonus(skillDodgeEntity.getCurrentLevel());
+        return this.dodge + clothesDodge + skillDodge;
+    }
+
+    public double getAllStrength() {
+        val skillStrengthEntity = getSkill(SkillType.STRENGTH);
+        return skillStrengthEntity.getType().getBonus(skillStrengthEntity.getCurrentLevel());
     }
 }

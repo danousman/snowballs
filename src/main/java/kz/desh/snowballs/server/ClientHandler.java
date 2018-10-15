@@ -44,7 +44,10 @@ public class ClientHandler extends Thread {
     private void listenCommands(BufferedReader in, PrintWriter out) throws IOException {
         String command;
         while ((command = in.readLine()) != null) {
-            out.println(this.commandExecutor.execute(player, command, (args) -> this.player = (PlayerEntity) args[0]));
+            out.println(this.commandExecutor.execute(player, command, (args) -> {
+                this.player = (PlayerEntity) args[0];
+                this.player.setOut(out);
+            }));
         }
     }
 
