@@ -1,16 +1,24 @@
 package kz.desh.snowballs.server.control.battle;
 
 import kz.desh.snowballs.server.entity.PlayerEntity;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 public class OneToOneBattle extends Thread {
-    private static final int THREAD_SLEEP = 100;
+    private static final int BATTLE_INTERVAL = 100;
+
+    private static final String PLAYER_BATTLE_CHARACTERISTICS_COMMAND = "20005" +
+            " %d" +     //current player heat
+            " %.1f" +   //current player energy
+            " %d" +     //enemy player heat
+            " %.1f";     //enemy player energy
 
     private PlayerEntity player1;
     private PlayerEntity player2;
 
-    private Characteristics playerCharacteristics1;
-    private Characteristics playerCharacteristics2;
+    private Characteristics player1Characteristics;
+    private Characteristics player2Characteristics;
 
     private boolean player1Ready;
     private boolean player2Ready;
@@ -19,34 +27,74 @@ public class OneToOneBattle extends Thread {
         this.player1 = player1;
         this.player2 = player2;
 
-        this.playerCharacteristics1 = new Characteristics(
+        this.player1Characteristics = new Characteristics(
                 player1.getAllHeat(),
                 player1.getAllDodge(),
                 player1.getAllStrength(),
-                0.5d);
-        this.playerCharacteristics2 = new Characteristics(
+                0.5d,
+                0d);
+        this.player2Characteristics = new Characteristics(
                 player2.getAllHeat(),
                 player2.getAllDodge(),
                 player2.getAllStrength(),
-                0.5d);
+                0.5d,
+                0d);
+    }
+
+    public void playerReady(PlayerEntity player) {
+        if (player.getId() == player1.getId()) {
+            player1Ready = true;
+        } else {
+            player2Ready = true;
+        }
     }
 
     @Override
     public void run() {
         try {
             while (true) {
-                Thread.sleep(THREAD_SLEEP);
+                Thread.sleep(BATTLE_INTERVAL);
+
+                if (player1Ready && player2Ready) {
+                    provideBattle();
+                }
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    @RequiredArgsConstructor
+    private void provideBattle() {
+        calculatePlayersCharacteristics();
+    }
+
+    private void calculatePlayersCharacteristics() {
+        this.player1Characteristics.increaseEnergy();
+        this.player2Characteristics.increaseEnergy();
+        this.player1.getOut().println(prepareCharacteristicsCommand(this.player1Characteristics, this.player2Characteristics));
+        this.player2.getOut().println(prepareCharacteristicsCommand(this.player2Characteristics, this.player1Characteristics));
+    }
+
+    private String prepareCharacteristicsCommand(Characteristics player1Characteristics, Characteristics player2Characteristics) {
+        return String.format(PLAYER_BATTLE_CHARACTERISTICS_COMMAND,
+                player1Characteristics.getHeat(),
+                player1Characteristics.getEnergy(),
+                player2Characteristics.getHeat(),
+                player2Characteristics.getEnergy());
+    }
+
+    @Setter
+    @Getter
+    @AllArgsConstructor
     private static class Characteristics {
-        private final int heat;
-        private final double dodge;
-        private final double strength;
-        private final double energyRecoverySpeed;
+        private int heat;
+        private double dodge;
+        private double strength;
+        private double energyRecoverySpeed;
+        private double energy;
+
+        void increaseEnergy() {
+            this.energy += this.energyRecoverySpeed;
+        }
     }
 }

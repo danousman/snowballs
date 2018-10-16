@@ -6,6 +6,7 @@ import kz.desh.snowballs.server.commands.ability.StudyAbilityCommand;
 import kz.desh.snowballs.server.commands.action.RetrieveActionCommand;
 import kz.desh.snowballs.server.commands.action.RetrieveFinishedActionCommand;
 import kz.desh.snowballs.server.commands.battle.CancelSearchBattleCommand;
+import kz.desh.snowballs.server.commands.battle.ReadyForBattleCommand;
 import kz.desh.snowballs.server.commands.battle.StartSearchBattleCommand;
 import kz.desh.snowballs.server.commands.item.PutOnClothesCommand;
 import kz.desh.snowballs.server.commands.item.RetrieveItemsCommand;
@@ -55,7 +56,8 @@ public class CommandExecutor {
             RetrievePlayerCharacteristicsCommand retrievePlayerCharacteristicsCommand,
 
             StartSearchBattleCommand startSearchBattleCommand,
-            CancelSearchBattleCommand cancelSearchBattleCommand) {
+            CancelSearchBattleCommand cancelSearchBattleCommand,
+            ReadyForBattleCommand readyForBattleCommand) {
         //processes
         this.commands.put(LoginCommand.COMMAND, loginCommand);
         this.commands.put(StudySkillCommand.COMMAND, studySkillCommand);
@@ -79,6 +81,7 @@ public class CommandExecutor {
         //battle
         this.commands.put(StartSearchBattleCommand.COMMAND, startSearchBattleCommand);
         this.commands.put(CancelSearchBattleCommand.COMMAND, cancelSearchBattleCommand);
+        this.commands.put(ReadyForBattleCommand.COMMAND, readyForBattleCommand);
     }
 
     public String execute(PlayerEntity player, String command, CommandCallback callback) {

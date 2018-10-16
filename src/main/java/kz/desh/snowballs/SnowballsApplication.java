@@ -16,6 +16,5 @@ public class SnowballsApplication {
                 .web(WebApplicationType.NONE)
                 .run(args);
         context.getBean(Server.class).start();
-        context.getBean(BattleStarter.class).start();
     }
 }

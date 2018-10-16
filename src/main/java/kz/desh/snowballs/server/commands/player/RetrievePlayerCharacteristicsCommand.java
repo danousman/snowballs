@@ -11,8 +11,8 @@ public class RetrievePlayerCharacteristicsCommand implements Command {
 
     private static final String RESPONSE_COMMAND = COMMAND +
             " %d" +      //heat
-            " %.2f" +    //dodge
-            " %.2f";     //strength
+            " %.1f" +    //dodge
+            " %.1f";     //strength
 
     @Override
     public String execute(PlayerEntity player, String command, CommandCallback callback) {

@@ -1,6 +1,7 @@
 package kz.desh.snowballs.server;
 
 import kz.desh.snowballs.server.commands.CommandExecutor;
+import kz.desh.snowballs.server.control.battle.BattleStarter;
 import kz.desh.snowballs.server.control.player.PlayerSaveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +19,14 @@ public class Server {
     private final CommandExecutor commandExecutor;
     private final ServerProps serverProps;
     private final PlayerSaveService playerSaveService;
+    private final BattleStarter battleStarter;
 
     private ServerSocket serverSocket;
 
     public void start() {
         try {
             this.serverSocket = new ServerSocket(this.serverProps.getPort());
+            this.battleStarter.start();
             listenClients();
         } catch (IOException e) {
             log.error("Exception occurs. Server will stop.", e);
