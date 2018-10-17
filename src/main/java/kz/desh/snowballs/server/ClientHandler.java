@@ -1,6 +1,7 @@
 package kz.desh.snowballs.server;
 
 import kz.desh.snowballs.server.commands.CommandExecutor;
+import kz.desh.snowballs.server.control.battle.BattleQueue;
 import kz.desh.snowballs.server.control.player.PlayerSaveService;
 import kz.desh.snowballs.server.control.player.Players;
 import kz.desh.snowballs.server.entity.PlayerEntity;
@@ -54,5 +55,6 @@ public class ClientHandler extends Thread {
     private void finishClientSession() {
         this.playerSaveService.savePlayer(this.player);
         Players.removePlayer(this.player);
+        BattleQueue.removePlayer(this.player);
     }
 }

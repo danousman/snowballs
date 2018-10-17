@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BattleStarter extends Thread {
     private static final int SEARCH_INTERVAL = 1000;
-    private static final String START_BATTLE_COMMAND = "20004 " +
-            "%s " + //name
-            "%d";   //heat
+    private static final String START_BATTLE_COMMAND = "20004" +
+            " %s" +  //name
+            " %d";   //heat
 
     @Override
     public void run() {

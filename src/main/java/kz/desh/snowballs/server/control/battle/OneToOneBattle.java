@@ -7,12 +7,13 @@ import lombok.Setter;
 
 public class OneToOneBattle extends Thread {
     private static final int BATTLE_INTERVAL = 100;
+    private static final int MAXIMUM_ENERGY = 100;
 
     private static final String PLAYER_BATTLE_CHARACTERISTICS_COMMAND = "20005" +
             " %d" +     //current player heat
             " %.1f" +   //current player energy
             " %d" +     //enemy player heat
-            " %.1f";     //enemy player energy
+            " %.1f";    //enemy player energy
 
     private PlayerEntity player1;
     private PlayerEntity player2;
@@ -42,10 +43,10 @@ public class OneToOneBattle extends Thread {
     }
 
     public void playerReady(PlayerEntity player) {
-        if (player.getId() == player1.getId()) {
-            player1Ready = true;
+        if (player.getId() == this.player1.getId()) {
+            this.player1Ready = true;
         } else {
-            player2Ready = true;
+            this.player2Ready = true;
         }
     }
 
@@ -55,7 +56,7 @@ public class OneToOneBattle extends Thread {
             while (true) {
                 Thread.sleep(BATTLE_INTERVAL);
 
-                if (player1Ready && player2Ready) {
+                if (this.player1Ready && this.player2Ready) {
                     provideBattle();
                 }
             }
@@ -94,7 +95,11 @@ public class OneToOneBattle extends Thread {
         private double energy;
 
         void increaseEnergy() {
-            this.energy += this.energyRecoverySpeed;
+            if (this.energy >= MAXIMUM_ENERGY) {
+                this.energy = MAXIMUM_ENERGY;
+            } else {
+                this.energy += this.energyRecoverySpeed;
+            }
         }
     }
 }
