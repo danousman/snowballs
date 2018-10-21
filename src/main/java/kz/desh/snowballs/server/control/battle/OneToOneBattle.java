@@ -56,7 +56,8 @@ public class OneToOneBattle extends Thread {
                 1000,
                 false,
                 3000,
-                3000);
+                3000,
+                false);
 
         this.player2DefaultSkill = new UsedSkill(
                 1000,
@@ -64,7 +65,8 @@ public class OneToOneBattle extends Thread {
                 1000,
                 false,
                 3000,
-                3000);
+                3000,
+                false);
     }
 
     public void playerReady(PlayerEntity player) {
@@ -128,14 +130,18 @@ public class OneToOneBattle extends Thread {
             player1DefaultSkill.decreaseCooldown(); //Уменьшаем время перезарядки скила
         } else { //Перезарядка прошла
             if (!player1DefaultSkill.isThrown()) { //Если ещё не брошен
+                val player2DodgeResult = player2Characteristics.getDodge() - player1Characteristics.getStrength(); //Расчитываем шанс уклонения второго игрока
+
+                if (player2DodgeResult < doubleRandom()) { //Если не увернулся
+                    player1DefaultSkill.hit(); //Попал
+                }
+
                 player1DefaultSkill.toThrow(); //Бросаем
             } else { //Если был брошен
                 if (player1DefaultSkill.getTimeLeft() > 0) { //Если скилл ещё не долетел
                     player1DefaultSkill.decreaseTimeLeft(); //Уменьшаем время полета
                 } else { //Если долетел
-                    val player2DodgeResult = player2Characteristics.getDodge() - player1Characteristics.getStrength(); //Расчитываем шанс уклонения второго игрока
-
-                    if (player2DodgeResult < doubleRandom()) { //Если не увернулся
+                    if (player1DefaultSkill.isHit()) { //Если попадает
                         player2Characteristics.receivedDamage(player1DefaultSkill.getDamage()); //Получил урон
                     }
 
@@ -190,6 +196,7 @@ public class OneToOneBattle extends Thread {
         private boolean thrown;
         private double cooldown;
         private double cooldownLeft;
+        private boolean hit;
 
         void decreaseCooldown() {
             this.cooldownLeft -= BATTLE_INTERVAL;
@@ -203,10 +210,15 @@ public class OneToOneBattle extends Thread {
             this.timeLeft -= BATTLE_INTERVAL;
         }
 
+        void hit() {
+            this.hit = true;
+        }
+
         void recharge() {
             this.timeLeft = this.flyTime;
             this.thrown = false;
             this.cooldownLeft = this.cooldown;
+            this.hit = false;
         }
     }
 }
