@@ -55,20 +55,16 @@ public class OneToOneBattle extends Thread {
                 10,
                 1000,
                 false,
-                false,
                 3000,
-                3000,
-                false);
+                3000);
 
         this.player2DefaultSkill = new UsedSkill(
                 1000,
                 10,
                 1000,
                 false,
-                false,
                 3000,
-                3000,
-                false);
+                3000);
     }
 
     public void playerReady(PlayerEntity player) {
@@ -128,33 +124,22 @@ public class OneToOneBattle extends Thread {
     }
 
     private void processDefaultSkill(UsedSkill player1DefaultSkill, Characteristics player1Characteristics, Characteristics player2Characteristics) {
-        if (!player1DefaultSkill.isPrepared()) { //Скилл не подготовлен
-            val player2DodgeResult = player2Characteristics.getDodge() - player1Characteristics.getStrength(); //Уклонение второго минус сила броска первого
-
-            if (player2DodgeResult < doubleRandom()) { //Если не увернулся
-                player1DefaultSkill.hit(); //Попал
-            } else { //Если увернулся
-                player1DefaultSkill.miss(); //Промазал
-            }
-
+        if (player1DefaultSkill.getCooldownLeft() > 0) { //Скил ещё не перезарядился
             player1DefaultSkill.decreaseCooldown(); //Уменьшаем время перезарядки скила
-            player1DefaultSkill.prepare(); //Устанавливаем флаг, что скил подготовлен
-        } else { //Если подготовлен
-            if (player1DefaultSkill.getCooldownLeft() > 0) { //Скил ещё не перезарядился
-                player1DefaultSkill.decreaseCooldown(); //Уменьшаем время перезарядки скила
-            } else { //Перезарядка прошла
-                if (!player1DefaultSkill.isThrown()) { //Если ещё не брошен
-                    player1DefaultSkill.toThrow(); //Бросаем
-                } else { //Если был брошен
-                    if (player1DefaultSkill.getTimeLeft() > 0) { //Если скилл ещё не долетел
-                        player1DefaultSkill.decreaseTimeLeft(); //Уменьшаем время полета
-                    } else { //Если долетел
-                        if (player1DefaultSkill.isHit()) { //Если должен был попасть
-                            player2Characteristics.receivedDamage(player1DefaultSkill.getDamage()); //Получил урон
-                        }
+        } else { //Перезарядка прошла
+            if (!player1DefaultSkill.isThrown()) { //Если ещё не брошен
+                player1DefaultSkill.toThrow(); //Бросаем
+            } else { //Если был брошен
+                if (player1DefaultSkill.getTimeLeft() > 0) { //Если скилл ещё не долетел
+                    player1DefaultSkill.decreaseTimeLeft(); //Уменьшаем время полета
+                } else { //Если долетел
+                    val player2DodgeResult = player2Characteristics.getDodge() - player1Characteristics.getStrength(); //Расчитываем шанс уклонения второго игрока
 
-                        player1DefaultSkill.recharge(); //Перезаряжаем скилл
+                    if (player2DodgeResult < doubleRandom()) { //Если не увернулся
+                        player2Characteristics.receivedDamage(player1DefaultSkill.getDamage()); //Получил урон
                     }
+
+                    player1DefaultSkill.recharge(); //Перезаряжаем скилл
                 }
             }
         }
@@ -203,25 +188,11 @@ public class OneToOneBattle extends Thread {
         private int damage;
         private double timeLeft;
         private boolean thrown;
-        private boolean hit;
         private double cooldown;
         private double cooldownLeft;
-        private boolean prepared;
-
-        void hit() {
-            this.hit = true;
-        }
-
-        void miss() {
-            this.hit = false;
-        }
 
         void decreaseCooldown() {
             this.cooldownLeft -= BATTLE_INTERVAL;
-        }
-
-        void prepare() {
-            this.prepared = true;
         }
 
         void toThrow() {
@@ -235,9 +206,7 @@ public class OneToOneBattle extends Thread {
         void recharge() {
             this.timeLeft = this.flyTime;
             this.thrown = false;
-            this.hit = false;
             this.cooldownLeft = this.cooldown;
-            this.prepared = false;
         }
     }
 }
